@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-discovery',
-  templateUrl: 'discovery.html',
+    selector: 'page-discovery',
+    templateUrl: 'discovery.html',
 })
 export class DiscoveryPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DiscoveryPage');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad DiscoveryPage');
+    }
 
 }

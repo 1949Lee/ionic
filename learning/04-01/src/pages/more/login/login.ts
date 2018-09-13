@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 
 /**
- * Generated class for the NotificationPage page.
+ * Generated class for the LoginPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
 @IonicPage()
 @Component({
-    selector: 'page-notification',
-    templateUrl: 'notification.html',
+    selector: 'page-login',
+    templateUrl: 'login.html',
 })
-export class NotificationPage {
+export class LoginPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad NotificationPage');
+        console.log('ionViewDidLoad LoginPage');
     }
 
 }

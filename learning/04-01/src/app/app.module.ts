@@ -13,33 +13,33 @@ import { MorePage } from '../pages/more/more';
 import { NotificationPage } from '../pages/notification/notification';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    ChatPage,
-    DiscoveryPage,
-    MorePage,
-    NotificationPage,
-    HomePage,
-    TabsPage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    ChatPage,
-    DiscoveryPage,
-    NotificationPage,
-    MorePage,
-    HomePage,
-    TabsPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    declarations: [
+        MyApp,
+        ChatPage,
+        DiscoveryPage,
+        MorePage,
+        NotificationPage,
+        HomePage,
+        TabsPage
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp)
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        ChatPage,
+        DiscoveryPage,
+        NotificationPage,
+        MorePage,
+        HomePage,
+        TabsPage
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        { provide: ErrorHandler, useClass: IonicErrorHandler }
+    ]
 })
-export class AppModule {}
+export class AppModule { }

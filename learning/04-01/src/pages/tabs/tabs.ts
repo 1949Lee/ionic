@@ -6,17 +6,17 @@ import { NotificationPage } from '../notification/notification';
 import { MorePage } from '../more/more';
 
 @Component({
-  templateUrl: 'tabs.html'
+    templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tabHome = HomePage;
-  tabDiscovery = DiscoveryPage;
-  tabChat = ChatPage;
-  tabNotification = NotificationPage;
-  tabMore  = MorePage;
+    tabHome = HomePage;
+    tabDiscovery = DiscoveryPage;
+    tabChat = ChatPage;
+    tabNotification = NotificationPage;
+    tabMore = MorePage;
 
-  constructor() {
+    constructor() {
 
-  }
+    }
 }

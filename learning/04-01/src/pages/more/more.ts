@@ -10,16 +10,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-more',
-  templateUrl: 'more.html',
+    selector: 'page-more',
+    templateUrl: 'more.html',
 })
 export class MorePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MorePage');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad MorePage');
+    }
+
+    nav(path: string) {
+
+    }
+
 
 }
