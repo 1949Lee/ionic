@@ -17,6 +17,13 @@ export class RestProvider {
   constructor(public http: HttpClient) {
   }
 
+  /**
+   * 根据API得到数据
+   *
+   * @private 私有
+   * @param {string} url 入参api的URL
+   * @returns {Observable<string[]>} 返回字符串数组
+   */
   private  getUrlReturn(url:string): Observable<string[]>{
     return this.http.get<string[]>(url).pipe(
       // tap(heroes => this.log(``)),
@@ -24,6 +31,15 @@ export class RestProvider {
     );
   }
 
+  /**
+   * 接口报错处理
+   *
+   * @private 私有
+   * @template T
+   * @param {*} url 接口路径
+   * @param {T} [result] 
+   * @returns {T} 错误时返回一个空数组，以便app继续处理
+   */
   private handleError<T> (url, result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // 打印错误
