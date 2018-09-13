@@ -23,7 +23,8 @@ export class MorePage {
     }
 
     nav(path: string) {
-
+        console.log(path);
+        this.navCtrl.push('LoginPage');
     }
 
 
