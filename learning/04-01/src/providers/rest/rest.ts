@@ -26,7 +26,7 @@ export class RestProvider {
    */
   private  getUrlReturn(url:string): Observable<string[]>{
     return this.http.get<string[]>(url).pipe(
-      // tap(heroes => this.log(``)),
+      tap(data => console.log(data)),
       catchError(this.handleError(url,[]))
     );
   }
@@ -37,7 +37,7 @@ export class RestProvider {
    * @private 私有
    * @template T
    * @param {*} url 接口路径
-   * @param {T} [result] 
+   * @param {T} [result]
    * @returns {T} 错误时返回一个空数组，以便app继续处理
    */
   private handleError<T> (url, result?: T) {
