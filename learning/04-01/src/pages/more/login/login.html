@@ -6,13 +6,29 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>登录</ion-title>
+        <ion-buttons>
+            <button ion-button>
+                <span ion-text color="primary" showWhen="ios">取消</span>
+                <ion-icon name="md-close" showWhen="android"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <ion-list inset>
+        <ion-item>
+            <ion-icon name="call" item-start></ion-icon>
+            <ion-input type="text" placeholder="手机号"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="lock" item-start></ion-icon>
+            <ion-input type="password" placeholder="密码"></ion-input>
+        </ion-item>
+        <ion-item></ion-item>
+    </ion-list>
 </ion-content>
