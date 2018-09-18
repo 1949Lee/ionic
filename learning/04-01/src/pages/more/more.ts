@@ -35,12 +35,12 @@ export class MorePage {
         }
     }
 
-    navLogin(){
+    navLogin() {
         let result: Modal = this.modalCtrl.create('LoginPage');
         result.present();
         result.onDidDismiss((data) => {
             console.log(data);
-            if(data&&data.result === 0){
+            if (data && data.result === 0) {
                 // 用户登录成功
             }
         });

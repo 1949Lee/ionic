@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, LoadingController, ToastController } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -8,6 +8,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsModule } from '../pages/tabs/tabs.module';
 import { RestProvider } from '../providers/rest/rest';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { PopOverService } from '../share/service/pop-over.service';
 
 @NgModule({
     declarations: [
@@ -17,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         BrowserModule,
         TabsModule,
         ReactiveFormsModule,
+        HttpClientModule,
         IonicModule.forRoot(MyApp)
     ],
     bootstrap: [IonicApp],
@@ -27,7 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-        RestProvider
+        RestProvider,
+        {provide:PopOverService,useFactory:(loading,toast)=>{ return new PopOverService(loading,toast)},deps:[LoadingController,ToastController]}
     ]
 })
 export class AppModule { }
