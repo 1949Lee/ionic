@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
 
 /**
  * Generated class for the MorePage page.
@@ -18,7 +18,7 @@ export class MorePage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        public modalCtrl:ModalController) {
+        public modalCtrl: ModalController) {
     }
 
     ionViewDidLoad() {
@@ -26,8 +26,24 @@ export class MorePage {
     }
 
     nav(path: string) {
-        let result = this.modalCtrl.create('LoginPage');
+        switch (path) {
+            case 'login':
+                this.navLogin();
+                break;
+            default:
+                break;
+        }
+    }
+
+    navLogin(){
+        let result: Modal = this.modalCtrl.create('LoginPage');
         result.present();
+        result.onDidDismiss((data) => {
+            console.log(data);
+            if(data&&data.result === 0){
+                // 用户登录成功
+            }
+        });
     }
 
 

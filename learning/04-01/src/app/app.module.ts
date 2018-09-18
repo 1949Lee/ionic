@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsModule } from '../pages/tabs/tabs.module';
 import { RestProvider } from '../providers/rest/rest';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { RestProvider } from '../providers/rest/rest';
     imports: [
         BrowserModule,
         TabsModule,
+        ReactiveFormsModule,
         IonicModule.forRoot(MyApp)
     ],
     bootstrap: [IonicApp],
@@ -25,7 +27,7 @@ import { RestProvider } from '../providers/rest/rest';
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
-    RestProvider
+        RestProvider
     ]
 })
 export class AppModule { }
