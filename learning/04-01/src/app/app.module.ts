@@ -10,6 +10,7 @@ import { RestProvider } from '../providers/rest/rest';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PopOverService } from '../share/service/pop-over.service';
+import { IonicStorageModule } from "@ionic/storage";
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { PopOverService } from '../share/service/pop-over.service';
         TabsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot()
     ],
     bootstrap: [IonicApp],
     entryComponents: [

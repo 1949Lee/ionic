@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ViewController,
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RestProvider } from '../../../providers/rest/rest';
 import { PopOverService } from '../../../share/service/pop-over.service';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -28,9 +29,10 @@ export class LoginPage {
         public navCtrl: NavController, // ionic导航服务
         public navParams: NavParams,  // ionic导航参数
         public viewCtrl: ViewController, // ionic视图服务
+        private storage: Storage, // ionic存储
         public loadingCtrl: LoadingController, // ionic加载服务
-        public rest: RestProvider,
-        private popover:PopOverService
+        public rest: RestProvider, // rest服务
+        private popover:PopOverService // 公共弹出服务
     ) {
         this.loginForm = this.formBuilder.group({
             userPhone: ['', [Validators.required]],
@@ -55,6 +57,8 @@ export class LoginPage {
             loader.dismiss();
             if(data.Status === 'OK'){
                 // 跳转登陆后界面
+                this.storage.set('userId',data.UserId);
+                this.viewCtrl.dismiss({ result: 0, message: '用户登录成功' });
             } else {
                 this.popover.toast({
                     message:data.StatusContent

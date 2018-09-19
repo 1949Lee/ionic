@@ -14,12 +14,19 @@
 
 
 <ion-content no-padding>
-  <ion-card no-margin class="un-login">
+  <ion-card *ngIf="!isLogined" no-margin class="un-login">
     <ion-card-header text-center>
       登录社区，体验更多功能
     </ion-card-header>
     <ion-card-content text-center>
       <button (click)="nav('login')" ion-button outline small>登录/注册</button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="isLogined" no-margin class="un-login">
+    <ion-card-header text-center>
+      已登录
+    </ion-card-header>
+    <ion-card-content text-center>
     </ion-card-content>
   </ion-card>
 </ion-content>
