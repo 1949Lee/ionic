@@ -56,7 +56,9 @@ export class LoginPage {
             if(data.Status === 'OK'){
                 // 跳转登陆后界面
             } else {
-
+                this.popover.toast({
+                    message:data.StatusContent
+                });
             }
         }, (error) => {
             loader.dismiss();
