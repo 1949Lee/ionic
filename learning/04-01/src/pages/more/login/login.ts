@@ -45,20 +45,21 @@ export class LoginPage {
     login() {
         console.log(this.loginForm.value);
         let loader: Loading = this.popover.loading({
-            message: '拼命登录中...',
-            callback:() => {
-                console.log('弹窗消失了');
-            }
+            content: '拼命登录中...',
+            // callback:(data) => {
+            //     // console.log('弹窗消失了');
+            // }
         });
         this.rest.login(this.loginForm.value).subscribe((data) => {
             console.log(data);
+            loader.dismiss();
             if(data.Status === 'OK'){
                 // 跳转登陆后界面
-                loader.dismiss();
             } else {
 
             }
         }, (error) => {
+            loader.dismiss();
             console.log(error);
         })
     }
