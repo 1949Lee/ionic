@@ -8,7 +8,7 @@
 
     <ion-navbar>
         <ion-title>登录</ion-title>
-        <ion-buttons>
+        <ion-buttons start>
             <button ion-button (click)="dismiss()">
                 <span ion-text color="primary" showWhen="ios">取消</span>
                 <ion-icon name="md-close" showWhen="android"></ion-icon>
@@ -33,5 +33,5 @@
         </form>
     </ion-list>
     <button ion-button block (click)="login()" [disabled]="!loginForm.valid">登录</button>
-    <button ion-button outline block>没有账号？注册</button>
+    <button ion-button outline block (click)="navRegister()">没有账号？注册</button>
 </ion-content>

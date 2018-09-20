@@ -21,7 +21,9 @@ import { IonicStorageModule } from "@ionic/storage";
         TabsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(MyApp,{
+            backButtonText:'返回'
+        }),
         IonicStorageModule.forRoot()
     ],
     bootstrap: [IonicApp],

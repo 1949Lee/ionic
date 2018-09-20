@@ -27,7 +27,6 @@ export class MorePage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad MorePage');
     }
 
     nav(path: string) {

@@ -41,9 +41,9 @@ export class LoginPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad LoginPage');
     }
 
+    // 登录
     login() {
         console.log(this.loginForm.value);
         let loader: Loading = this.popover.loading({
@@ -70,6 +70,12 @@ export class LoginPage {
         })
     }
 
+    // 导航到注册页面
+    navRegister(){
+        this.navCtrl.push('RegisterPage');
+    }
+
+    // 取消并返回
     dismiss() {
         this.viewCtrl.dismiss({ result: 1, message: '用户取消，未登录' });
     }

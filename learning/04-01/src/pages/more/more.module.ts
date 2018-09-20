@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { MorePage } from './more';
 import { LoginPageModule } from './login/login.module';
+import { RegisterPageModule } from './register/register.module';
 
 @NgModule({
   declarations: [
@@ -9,11 +10,13 @@ import { LoginPageModule } from './login/login.module';
   ],
   imports: [
     LoginPageModule,
+    RegisterPageModule,
     IonicPageModule.forChild(MorePage),
   ],
   exports: [
     MorePage,
-    LoginPageModule
+    LoginPageModule,
+    RegisterPageModule
   ]
 })
 export class MorePageModule { }

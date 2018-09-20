@@ -19,7 +19,6 @@ export class DiscoveryPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad DiscoveryPage');
     }
 
 }
