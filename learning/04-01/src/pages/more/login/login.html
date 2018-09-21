@@ -10,7 +10,10 @@
         <ion-title>登录</ion-title>
         <ion-buttons start>
             <button ion-button (click)="dismiss()">
+                <!-- ios显示文字：取消 -->
                 <span ion-text color="primary" showWhen="ios">取消</span>
+
+                <!-- 安卓显示图标icon -->
                 <ion-icon name="md-close" showWhen="android"></ion-icon>
             </button>
         </ion-buttons>
@@ -22,16 +25,23 @@
 <ion-content padding>
     <ion-list inset>
         <form [formGroup]="loginForm">
+            <!-- 手机号 -->
             <ion-item no-padding>
                 <ion-icon name="call" item-start></ion-icon>
                 <ion-input type="text" placeholder="手机号" formControlName="userPhone"></ion-input>
             </ion-item>
+
+            <!-- 密码 -->
             <ion-item no-padding>
                 <ion-icon name="lock" item-start></ion-icon>
                 <ion-input type="password" placeholder="密码" formControlName="password"></ion-input>
             </ion-item>
         </form>
     </ion-list>
+
+    <!-- 登录按钮 -->
     <button ion-button block (click)="login()" [disabled]="!loginForm.valid">登录</button>
-    <button ion-button outline block (click)="navRegister()">没有账号？注册</button>
+
+    <!-- 点击跳转注册 -->
+    <div text-center><a (click)="navRegister()">没有账号？注册</a></div>
 </ion-content>

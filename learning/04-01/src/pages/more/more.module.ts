@@ -3,6 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { MorePage } from './more';
 import { LoginPageModule } from './login/login.module';
 import { RegisterPageModule } from './register/register.module';
+import { ShareModule } from '../../share/shre.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { RegisterPageModule } from './register/register.module';
   imports: [
     LoginPageModule,
     RegisterPageModule,
+    ShareModule,
     IonicPageModule.forChild(MorePage),
   ],
   exports: [

@@ -6,6 +6,8 @@
 -->
 <ion-header>
 
+    <!-- ionic会自动添加一个返回按钮 -->
+
     <ion-navbar>
         <ion-title>用户注册</ion-title>
     </ion-navbar>
@@ -14,5 +16,32 @@
 
 
 <ion-content padding>
+    <ion-list inset>
+        <form [formGroup]="registerForm">
+            <ion-item no-padding>
+                <ion-icon name="call" item-start></ion-icon>
+                <ion-input type="text" placeholder="手机号" formControlName="userPhone"></ion-input>
+            </ion-item>
 
+            <!-- 用户昵称 -->
+            <ion-item no-padding>
+                <ion-icon name="call" item-start></ion-icon>
+                <ion-input type="text" placeholder="昵称" formControlName="nickname"></ion-input>
+            </ion-item>
+
+            <!-- 密码和确认密码 -->
+            <div formGroupName="passwordInfo">
+                <ion-item no-padding>
+                    <ion-icon name="lock" item-start></ion-icon>
+                    <ion-input type="password" placeholder="密码" formControlName="password"></ion-input>
+                </ion-item>
+                <ion-item no-padding>
+                    <ion-icon name="lock" item-start></ion-icon>
+                    <ion-input type="password" placeholder="确认密码" formControlName="passwordConfirm"></ion-input>
+                </ion-item>
+            </div>
+        </form>
+    </ion-list>
+    <button ion-button block (click)="register()" [disabled]="!registerForm.valid">注册</button>
+    <div text-center><a (click)="navLogin()">已有账号？点击登录</a></div>
 </ion-content>
