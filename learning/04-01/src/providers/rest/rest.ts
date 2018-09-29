@@ -19,8 +19,8 @@ export class RestProvider {
     //account
     private apiUrlRegister = 'https://imoocqa.gugujiankong.com/api/account/register';
     private apiUrlLogin = 'https://imoocqa.gugujiankong.com/api/account/login';
-    //   private apiUrlUserInfo = 'https://imoocqa.gugujiankong.com/api/account/userinfo';
-    //   private apiUrlUpdateNickName = 'https://imoocqa.gugujiankong.com/api/account/updatenickname';
+    private apiUrlUserInfo = 'https://imoocqa.gugujiankong.com/api/account/userinfo'; // userId=5ba4a2ea647eb46f607f95ab
+    private apiUrlUpdateNickName = 'https://imoocqa.gugujiankong.com/api/account/updatenickname'; // userId=5ba4a2ea647eb46f607f95ab&nickname=Lee
     //   private apiGetUserQuestionList = "https://imoocqa.gugujiankong.com/api/account/getuserquestionlist";
 
     //question
@@ -34,14 +34,32 @@ export class RestProvider {
     //notification
     //   private apiUrlUserNotifications = "https://imoocqa.gugujiankong.com/api/account/usernotifications";
 
-    // 登录
+    /**
+     * 登录
+     */
     login(data): Observable<{ [key: string]: any }> {
         return this.getUrlReturn(this.apiUrlLogin,data);
     }
 
-    // 注册
+    /**
+     * 注册
+     */
     register(data): Observable<{ [key: string]: any }> {
         return this.getUrlReturn(this.apiUrlRegister,data);
+    }
+
+    /**
+     * 获取用户信息
+     */
+    getUserInfo(data): Observable<{ [key: string]: any }> {
+        return this.getUrlReturn(this.apiUrlUserInfo,data);
+    }
+
+    /**
+     * 获取用户信息
+     */
+    updateUserInfo(data): Observable<{ [key: string]: any }> {
+        return this.getUrlReturn(this.apiUrlUpdateNickName,data);
     }
 
     constructor(public http: HttpClient) { }

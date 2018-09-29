@@ -6,27 +6,61 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>更多</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>我的</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content no-padding>
-  <ion-card *ngIf="!isLogined" no-margin class="un-login">
-    <ion-card-header text-center>
-      登录社区，探索未知
-    </ion-card-header>
-    <ion-card-content text-center>
-      <button (click)="nav('login')" ion-button outline small>登录/注册</button>
-    </ion-card-content>
-  </ion-card>
-  <ion-card *ngIf="isLogined" no-margin class="un-login">
-    <ion-card-header text-center>
-      已登录
-    </ion-card-header>
-    <ion-card-content text-center>
-    </ion-card-content>
-  </ion-card>
+    <ion-card *ngIf="!isLogined" no-margin class="un-login">
+        <ion-card-header text-center>
+            登录社区，探索未知
+        </ion-card-header>
+        <ion-card-content text-center>
+            <button (click)="nav('login')" ion-button outline small>登录/注册</button>
+        </ion-card-content>
+    </ion-card>
+    <div *ngIf="isLogined" margin-vertical class="login">
+        <ion-list margin-bottom class="info-list">
+            <!-- <ion-list-header>Today</ion-list-header> -->
+            <ion-item detail-push (click)="nav('userInfo')">
+                <ion-avatar item-start>
+                    <img class="avatar" [src]="avatar">
+                </ion-avatar>
+                <h2>{{userInfo.nickname}}</h2>
+                <p>点击修改个人信息</p>
+            </ion-item>
+        </ion-list>
+        <ion-list margin-bottom class="my-list">
+            <ion-item detail-push (click)="nav('userInfo')">
+                <ion-icon [style.color]="'#1788eb'" name="flag" item-start></ion-icon>
+                <h2>我的提问</h2>
+            </ion-item>
+            <ion-item detail-push (click)="nav('userInfo')">
+                <ion-icon [style.color]="'#fda529'" name="star" item-start></ion-icon>
+                <h2>我的收藏</h2>
+            </ion-item>
+            <ion-item detail-push (click)="nav('userInfo')">
+                <ion-icon [style.color]="'#db323e'" name="bookmark" item-start></ion-icon>
+                <h2>我的关注</h2>
+            </ion-item>
+        </ion-list>
+        <ion-list margin-bottom class="settings-list">
+            <ion-item (click)="nav('userInfo')">
+                <ion-icon [style.color]="'#1788eb'" name="cloudy-night" item-start></ion-icon>
+                <h2>夜间模式</h2>
+                <ion-toggle item-end checked="false"></ion-toggle>
+            </ion-item>
+            <ion-item detail-push (click)="nav('userInfo')">
+                <ion-icon name="cog" item-start></ion-icon>
+                <h2>设置</h2>
+            </ion-item>
+            <ion-item detail-push (click)="nav('userInfo')">
+                <ion-icon name="help-circle" item-start></ion-icon>
+                <h2>关于</h2>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-content>

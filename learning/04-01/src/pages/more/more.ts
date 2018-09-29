@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { RestProvider } from '../../providers/rest/rest';
+import { PopOverService } from '../../share/service/pop-over.service';
 
 /**
  * Generated class for the MorePage page.
@@ -16,13 +18,25 @@ import { Storage } from '@ionic/storage';
 })
 export class MorePage {
 
+    // 用户是否登录
     isLogined = false;
+
+    // 用户信息是否有效
+    isValidInfo = false;
+    avatar = `../../assets/imgs/avatar.png?${Math.random()}`;
+
+    userInfo = {
+        nickname:'未登录',
+        avatar:null,
+    }
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         public modalCtrl: ModalController,
-        private storage:Storage
+        private storage:Storage,
+        private rest:RestProvider,
+        private popOver:PopOverService
         ) {
     }
 
@@ -31,8 +45,14 @@ export class MorePage {
 
     nav(path: string) {
         switch (path) {
+            // 导航到登录
             case 'login':
                 this.navLogin();
+                break;
+
+            // 导航到个人信息
+            case 'userInfo':
+                this.navToUserInfo();
                 break;
             default:
                 break;
@@ -53,10 +73,25 @@ export class MorePage {
         });
     }
 
+    navToUserInfo(){
+        this.navCtrl.push('UserInfoPage');
+    }
+
     ionViewDidEnter(){
         this.storage.get('userId').then((value) => {
+            console.log(value);
             if(value){
                 this.isLogined = true;
+                this.rest.getUserInfo({userId:value}).subscribe((data) => {
+                    console.log(data);
+                    if(data.Status === 'OK'){
+                        this.userInfo.avatar = data.UserHeadface;
+                        this.userInfo.nickname = data.UserNickName;
+                        this.avatar = `${data.UserHeadface}?${Math.random()}`
+                    } else {
+                        this.popOver.toast({message:data.StatusContent});
+                    }
+                });
             } else {
                 this.isLogined = false;
             }

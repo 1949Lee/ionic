@@ -4,6 +4,8 @@ import { MorePage } from './more';
 import { LoginPageModule } from './login/login.module';
 import { RegisterPageModule } from './register/register.module';
 import { ShareModule } from '../../share/shre.module';
+import { UserInfoPageModule } from './user-info/user-info.module';
+import { UpdateAvatarPageModule } from './update-avatar/update-avatar.module';
 
 @NgModule({
   declarations: [
@@ -12,13 +14,17 @@ import { ShareModule } from '../../share/shre.module';
   imports: [
     LoginPageModule,
     RegisterPageModule,
+    UserInfoPageModule,
+    UpdateAvatarPageModule,
     ShareModule,
     IonicPageModule.forChild(MorePage),
   ],
   exports: [
     MorePage,
     LoginPageModule,
-    RegisterPageModule
+    RegisterPageModule,
+    UserInfoPageModule,
+    UpdateAvatarPageModule
   ]
 })
 export class MorePageModule { }
