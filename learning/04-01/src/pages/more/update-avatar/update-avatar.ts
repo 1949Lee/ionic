@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ViewController, normalizeURL } from 'ionic-angular';
 import { RestProvider } from '../../../providers/rest/rest';
 import { Storage } from '@ionic/storage';
 import { PopOverService } from '../../../share/service/pop-over.service';
@@ -7,8 +7,9 @@ import { PopOverService } from '../../../share/service/pop-over.service';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
 
-declare let cordova :any;
+declare let cordova: any;
 
 /**
  * Generated class for the UpdateAvatarPage page.
@@ -34,7 +35,7 @@ export class UpdateAvatarPage {
 
     random = Math.random;
 
-    lastImg:any;
+    lastImg: any;
 
     constructor(
         public navCtrl: NavController,
@@ -42,10 +43,12 @@ export class UpdateAvatarPage {
         private platform: Platform,
         private storage: Storage,
         private rest: RestProvider,
+        private viewCtrl:ViewController,
         private popOver: PopOverService,
         private actionSheetCtrl: ActionSheetController,
         private file: File,
         private filePath: FilePath,
+        private transfer: Transfer,
         private camera: Camera) {
         // console.log();
         // const data = this.navParams.data.UpdateAvatar;
@@ -71,13 +74,13 @@ export class UpdateAvatarPage {
                     text: '拍照',
                     role: 'destructive',
                     handler: () => {
-                        console.log('拍照');
+                        this.tackePicture(this.camera.PictureSourceType.CAMERA);
                     }
                 },
                 {
                     text: '从相册选择',
                     handler: () => {
-                        console.log('从相册选择');
+                        this.tackePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
                     }
                 },
                 {
@@ -117,7 +120,7 @@ export class UpdateAvatarPage {
         }
         this.camera.getPicture(options).then((imgPath) => {
 
-            let resPath,resName;
+            let resPath, resName;
             // 安卓进行特别处理
             if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
                 this.filePath.resolveNativePath(imgPath).then((fPath) => {
@@ -137,20 +140,52 @@ export class UpdateAvatarPage {
             }
 
             this.copyFileToLocal(resPath, resName, this.createName());
-        },error =>{
-            this.popOver.toast({message:'请在app中操作或检查app相关权限'});
+        }, error => {
+            this.popOver.toast({ message: '请在app中操作或检查app相关权限' });
         })
     }
-    copyFileToLocal(path,name,resultName){
-        this.file.copyFile(path,name,cordova.file.data.dataDirectory,resultName).then((res)=>{
+    copyFileToLocal(path, name, resultName) {
+        this.file.copyFile(path, name, cordova.file.data.dataDirectory, resultName).then((res) => {
             this.lastImg = res;
-        },error => {
-            this.popOver.toast({message:'缓存图片出错，请重试'});
+        }, error => {
+            this.popOver.toast({ message: '缓存图片出错，请重试' });
         });
     }
 
-    createName(){
+    createName() {
         return `${(new Date()).getTime()}.jpg`
+    }
+
+    // 把路径处理为可以上传的路径
+    pathForImage(img) {
+        if (img === null) {
+            return '';
+        } else {
+            // return cordova.file.dataDirectory + img;
+            return normalizeURL(cordova.file.dataDirectory + img);
+        }
+    }
+
+    uploadIamge() {
+        let url = 'https://imoocqa.gugujiankong.com/api/account/uploadheadface'; // 上传请求地址
+        let targetPath = this.pathForImage(this.lastImg); // 最终文件路径
+        let fileName = this.userId + '.jpg';
+        let options = {
+            fileKey: "file",
+            fileName: fileName,
+            chunkedMode: false,
+            mimeType: 'multipart/form-data',
+            params: { fileName: fileName, userId: this.userId }
+        };
+
+        const fileTransfer: TransferObject = this.transfer.create();
+        let loader = this.popOver.loading({content:'玩命上传中'});
+        fileTransfer.upload(targetPath, url, options).then(() => {
+            loader.dismiss();
+            this.popOver.toast({message:'上传头像成功',callback:()=>{
+                this.navCtrl.pop();
+            }});
+        });
     }
 
 }

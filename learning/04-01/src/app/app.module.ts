@@ -11,6 +11,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PopOverService } from '../share/service/pop-over.service';
 import { IonicStorageModule } from "@ionic/storage";
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+import { Transfer } from '@ionic-native/transfer';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
     declarations: [
@@ -35,6 +39,10 @@ import { IonicStorageModule } from "@ionic/storage";
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         RestProvider,
+        File,
+        FilePath,
+        Transfer,
+        Camera,
         {provide:PopOverService,useFactory:(loading,toast)=>{ return new PopOverService(loading,toast)},deps:[LoadingController,ToastController]}
     ]
 })

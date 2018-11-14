@@ -14,7 +14,7 @@
 
 
 <ion-content no-padding>
-    <img src="" [style.width]="'100%'">
+    <img *ngIf="lastImg === null" [src]="pathForImage(lastImg)" [style.width]="'100%'">
     <h3>请从图片库中选择您的头像</h3>
 </ion-content>
 
@@ -28,8 +28,8 @@
         </button>
 
         <!-- 上传按钮 -->
-        <button ion-button start>
-            <ion-icon name="cloud-upload"></ion-icon>
+        <button ion-button start  [disabled]="lastImg === null">
+            <ion-icon name="cloud-upload" (click)="uploadIamge()"></ion-icon>
             上传
         </button>
     </ion-toolbar>
