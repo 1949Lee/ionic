@@ -5,9 +5,9 @@ import { Storage } from '@ionic/storage';
 import { PopOverService } from '../../../share/service/pop-over.service';
 
 import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { Transfer, TransferObject } from '@ionic-native/transfer';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FilePath } from '@ionic-native/file-path';
 
 declare let cordova: any;
 
@@ -35,7 +35,7 @@ export class UpdateAvatarPage {
 
     random = Math.random;
 
-    lastImg: any;
+    lastImg: any = null;
 
     constructor(
         public navCtrl: NavController,
@@ -43,12 +43,12 @@ export class UpdateAvatarPage {
         private platform: Platform,
         private storage: Storage,
         private rest: RestProvider,
-        private viewCtrl:ViewController,
+        private viewCtrl: ViewController,
         private popOver: PopOverService,
         private actionSheetCtrl: ActionSheetController,
         private file: File,
         private filePath: FilePath,
-        private transfer: Transfer,
+        private fileTransfer: FileTransfer,
         private camera: Camera) {
         // console.log();
         // const data = this.navParams.data.UpdateAvatar;
@@ -116,37 +116,41 @@ export class UpdateAvatarPage {
             quality: 100,
             sourceType: sourceType,
             saveToPhotoAlbum: false, // 若是拍照，拍照的图片是否保存到相册
-            correctOrientation: true // 拍照角度不对时是否纠正
+            correctOrientation: true, // 拍照角度不对时是否纠正
+            allowEdit:true,
+            destinationType: this.camera.DestinationType.FILE_URI
         }
         this.camera.getPicture(options).then((imgPath) => {
 
             let resPath, resName;
-            // 安卓进行特别处理
-            if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-                this.filePath.resolveNativePath(imgPath).then((fPath) => {
+            // // 安卓进行特别处理
+            // if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+            //     this.filePath.resolveNativePath(imgPath).then((fPath) => {
 
-                    // 得到正确图片的路径
-                    resPath = fPath.substr(0, fPath.lastIndexOf('/') + 1);
+            //         // 得到正确图片的路径
+            //         resPath = fPath.substr(0, fPath.lastIndexOf('/') + 1);
 
-                    // 得到正确的图片文件名。
-                    resName = imgPath.substring(imgPath.lastIndexOf('/') + 1, imgPath.lastIndexOf('?'));
-                });
-            } else {
-                // 得到正确图片的路径
+            //         // 得到正确的图片文件名。
+            //         resName = imgPath.substring(imgPath.lastIndexOf('/') + 1, imgPath.lastIndexOf('?'));
+            //     });
+            // } else {
+            //     // 得到正确图片的路径
                 resPath = imgPath.substr(0, imgPath.lastIndexOf('/') + 1);
 
-                // 得到正确的图片文件名。
+            //     // 得到正确的图片文件名。
                 resName = imgPath.substring(imgPath.lastIndexOf('/') + 1);
-            }
-
+            // }
+            console.log(imgPath);
             this.copyFileToLocal(resPath, resName, this.createName());
         }, error => {
             this.popOver.toast({ message: '请在app中操作或检查app相关权限' });
         })
     }
+
     copyFileToLocal(path, name, resultName) {
-        this.file.copyFile(path, name, cordova.file.data.dataDirectory, resultName).then((res) => {
-            this.lastImg = res;
+        this.file.copyFile(path, name, this.file.dataDirectory, resultName).then((res) => {
+            console.log(res.toURL());
+            this.lastImg = res.toInternalURL();
         }, error => {
             this.popOver.toast({ message: '缓存图片出错，请重试' });
         });
@@ -161,8 +165,8 @@ export class UpdateAvatarPage {
         if (img === null) {
             return '';
         } else {
-            // return cordova.file.dataDirectory + img;
-            return normalizeURL(cordova.file.dataDirectory + img);
+            return img;
+            // return normalizeURL(cordova.file.dataDirectory + img);
         }
     }
 
@@ -170,7 +174,7 @@ export class UpdateAvatarPage {
         let url = 'https://imoocqa.gugujiankong.com/api/account/uploadheadface'; // 上传请求地址
         let targetPath = this.pathForImage(this.lastImg); // 最终文件路径
         let fileName = this.userId + '.jpg';
-        let options = {
+        let options: FileUploadOptions = {
             fileKey: "file",
             fileName: fileName,
             chunkedMode: false,
@@ -178,13 +182,19 @@ export class UpdateAvatarPage {
             params: { fileName: fileName, userId: this.userId }
         };
 
-        const fileTransfer: TransferObject = this.transfer.create();
-        let loader = this.popOver.loading({content:'玩命上传中'});
+        const fileTransfer: FileTransferObject = this.fileTransfer.create();
+        let loader = this.popOver.loading({ content: '玩命上传中' });
         fileTransfer.upload(targetPath, url, options).then(() => {
             loader.dismiss();
-            this.popOver.toast({message:'上传头像成功',callback:()=>{
-                this.navCtrl.pop();
-            }});
+            this.popOver.toast({
+                message: '上传头像成功', callback: () => {
+                    this.navCtrl.pop();
+                }
+            });
+        },error => {
+            loader.dismiss();
+            this.popOver.toast({ message: '上传图片出错，请重试' });
+            console.log(error);
         });
     }
 

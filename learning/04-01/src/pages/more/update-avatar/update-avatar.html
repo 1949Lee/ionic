@@ -14,8 +14,8 @@
 
 
 <ion-content no-padding>
-    <img *ngIf="lastImg === null" [src]="pathForImage(lastImg)" [style.width]="'100%'">
-    <h3>请从图片库中选择您的头像</h3>
+    <img *ngIf="lastImg !== null" [src]="pathForImage(lastImg)" [style.width]="'100%'">
+    <h3 *ngIf="lastImg === null">请从图片库中选择您的头像</h3>
 </ion-content>
 
 <ion-footer>
