@@ -36,6 +36,7 @@ export class UpdateAvatarPage {
     random = Math.random;
 
     lastImg: any = null;
+    lastImgURL: string = null;
 
     constructor(
         public navCtrl: NavController,
@@ -50,11 +51,6 @@ export class UpdateAvatarPage {
         private filePath: FilePath,
         private fileTransfer: FileTransfer,
         private camera: Camera) {
-        // console.log();
-        // const data = this.navParams.data.UpdateAvatar;
-        // this.UpdateAvatar.nickname = data.nickname
-        // this.UpdateAvatar.avatar = data.avatar
-        // this.avatar = `${data.avatar}?${Math.random()}`
     }
 
     ionViewDidEnter() {
@@ -117,30 +113,16 @@ export class UpdateAvatarPage {
             sourceType: sourceType,
             saveToPhotoAlbum: false, // 若是拍照，拍照的图片是否保存到相册
             correctOrientation: true, // 拍照角度不对时是否纠正
-            allowEdit:true,
+            allowEdit: true,
             destinationType: this.camera.DestinationType.FILE_URI
         }
         this.camera.getPicture(options).then((imgPath) => {
 
             let resPath, resName;
-            // // 安卓进行特别处理
-            // if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-            //     this.filePath.resolveNativePath(imgPath).then((fPath) => {
-
-            //         // 得到正确图片的路径
-            //         resPath = fPath.substr(0, fPath.lastIndexOf('/') + 1);
-
-            //         // 得到正确的图片文件名。
-            //         resName = imgPath.substring(imgPath.lastIndexOf('/') + 1, imgPath.lastIndexOf('?'));
-            //     });
-            // } else {
-            //     // 得到正确图片的路径
-                resPath = imgPath.substr(0, imgPath.lastIndexOf('/') + 1);
-
-            //     // 得到正确的图片文件名。
-                resName = imgPath.substring(imgPath.lastIndexOf('/') + 1);
-            // }
-            console.log(imgPath);
+            // 得到正确图片的路径
+            resPath = imgPath.substr(0, imgPath.lastIndexOf('/') + 1);
+            // 得到正确的图片文件名。
+            resName = imgPath.substring(imgPath.lastIndexOf('/') + 1);
             this.copyFileToLocal(resPath, resName, this.createName());
         }, error => {
             this.popOver.toast({ message: '请在app中操作或检查app相关权限' });
@@ -149,8 +131,14 @@ export class UpdateAvatarPage {
 
     copyFileToLocal(path, name, resultName) {
         this.file.copyFile(path, name, this.file.dataDirectory, resultName).then((res) => {
-            console.log(res.toURL());
-            this.lastImg = res.toInternalURL();
+            this.lastImgURL = res.toURL();
+            const resPath = this.lastImgURL.substr(0, this.lastImgURL.lastIndexOf('/') + 1);
+            console.log(resPath,res.name);
+            this.file.readAsDataURL(resPath,res.name).then((_:string)=>{
+                this.lastImg = _;
+            },error => {
+                this.popOver.toast({ message: '缓存图片出错，请重试' });
+            });
         }, error => {
             this.popOver.toast({ message: '缓存图片出错，请重试' });
         });
@@ -160,19 +148,9 @@ export class UpdateAvatarPage {
         return `${(new Date()).getTime()}.jpg`
     }
 
-    // 把路径处理为可以上传的路径
-    pathForImage(img) {
-        if (img === null) {
-            return '';
-        } else {
-            return img;
-            // return normalizeURL(cordova.file.dataDirectory + img);
-        }
-    }
-
     uploadIamge() {
         let url = 'https://imoocqa.gugujiankong.com/api/account/uploadheadface'; // 上传请求地址
-        let targetPath = this.pathForImage(this.lastImg); // 最终文件路径
+        let targetPath = this.lastImgURL; // 最终文件路径
         let fileName = this.userId + '.jpg';
         let options: FileUploadOptions = {
             fileKey: "file",
@@ -187,11 +165,10 @@ export class UpdateAvatarPage {
         fileTransfer.upload(targetPath, url, options).then(() => {
             loader.dismiss();
             this.popOver.toast({
-                message: '上传头像成功', callback: () => {
-                    this.navCtrl.pop();
-                }
+                message: '上传头像成功'
             });
-        },error => {
+            this.navCtrl.pop();
+        }, error => {
             loader.dismiss();
             this.popOver.toast({ message: '上传图片出错，请重试' });
             console.log(error);
