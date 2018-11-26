@@ -1,1 +1,18 @@
-page-home {}
+page-home {
+    .search-header-button {
+        color: rgb(214, 213, 213);
+    }
+    .tab-menus{
+        .tab{
+            height:auto;
+            margin: 0px;
+            padding: 0px;
+            display: inline-block;
+            width: 100%;
+            color: #0f0f0fc2;
+        }
+        .tab-divider{
+            float: left;
+        }
+    }
+}
