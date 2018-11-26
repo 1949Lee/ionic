@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../../providers/rest/rest';
 import { Storage } from '@ionic/storage';
 import { PopOverService } from '../../../share/service/pop-over.service';
+import { avatarPath } from '../../../common/assets';
 
 /**
  * Generated class for the UserInfoPage page.
@@ -18,11 +19,14 @@ import { PopOverService } from '../../../share/service/pop-over.service';
 })
 export class UserInfoPage {
 
+    /**存储用户的信息的结构体 */
     userInfo = {
         nickname: '未登录',
-        avatar: '../../assets/imgs/avatar.png'
+        avatar: avatarPath
     }
-    avatar = `../../assets/imgs/avatar.png?${Math.random()}`;
+
+    /**默认头像 */
+    avatar = `${avatarPath}?${Math.random()}`;
 
     constructor(
         public navCtrl: NavController,
@@ -54,6 +58,7 @@ export class UserInfoPage {
         });
     }
 
+    /**导航 */
     nav(path: string) {
         switch (path) {
             case 'updateAvatar': // 导航到修改头像
@@ -64,10 +69,12 @@ export class UserInfoPage {
         }
     }
 
+    /**导航到更换头像 */
     navUpdateAvatar() {
         this.navCtrl.push('UpdateAvatarPage');
     }
 
+    /**保存个人信息 */
     update() {
         this.storage.get('userId').then((data) => {
             let loader = this.popOver.loading({ content: '努力保存中...' });

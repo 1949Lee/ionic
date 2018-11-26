@@ -11,9 +11,11 @@ export class MyApp {
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
         platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
+
+            // 好了，现在我们的程序已经加载完毕了，你在这里可以写一些全局代码。但是越少越好！！！
             statusBar.styleDefault();
+
+            // 首屏加载等待动画关闭
             splashScreen.hide();
         });
     }

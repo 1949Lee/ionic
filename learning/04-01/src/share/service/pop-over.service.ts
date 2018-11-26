@@ -9,6 +9,7 @@ export class PopOverService {
         ){
     }
 
+    /**创建等待动画，并返回动画对象 */
     loading(opt:PopLoader): Loading{
         let loader:Loading = this.loadingCtrl.create({
             spinner: opt.spinner || 'dots',
@@ -26,7 +27,8 @@ export class PopOverService {
         return loader;
     }
 
-    toast(opt:PopToaster) {
+    /**创建黑色悬浮提示，并返回对象。默认显示在底部，3秒后消失 */
+    toast(opt:PopToaster): Toast{
         let toaster: Toast = this.toastCtrl.create({
             message:opt.message,
             cssClass: opt.cssClass || 'lee-toast',

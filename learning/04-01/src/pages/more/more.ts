@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ion
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../providers/rest/rest';
 import { PopOverService } from '../../share/service/pop-over.service';
+import { avatarPath } from '../../common/assets';
 
 /**
  * Generated class for the MorePage page.
@@ -18,13 +19,16 @@ import { PopOverService } from '../../share/service/pop-over.service';
 })
 export class MorePage {
 
-    // 用户是否登录
+    /**用户是否登录 */
     isLogined = false;
 
-    // 用户信息是否有效
+    /**用户信息是否有效 */
     isValidInfo = false;
-    avatar = `../../assets/imgs/avatar.png?${Math.random()}`;
 
+    /**默认头像路径 */
+    avatar = `${avatarPath}?${Math.random()}`;
+
+    /**用户信息 */
     userInfo = {
         nickname:'未登录',
         avatar:null,
@@ -43,6 +47,7 @@ export class MorePage {
     ionViewDidLoad() {
     }
 
+    /**导航 */
     nav(path: string) {
         switch (path) {
             // 导航到登录
@@ -59,6 +64,7 @@ export class MorePage {
         }
     }
 
+    /**跳转到登录 */
     navLogin() {
         let result: Modal = this.modalCtrl.create('LoginPage');
         result.present();

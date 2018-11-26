@@ -20,14 +20,15 @@ import { RestProvider } from '../../../providers/rest/rest';
 })
 export class RegisterPage {
 
-    registerForm: FormGroup; // 登录form
+    /**注册form */
+    registerForm: FormGroup;
     formBuilder: FormBuilder = new FormBuilder();
     private parentPage = null;
 
     constructor(
-        public navCtrl: NavController, // ionic导航服务
-        public navParams: NavParams,  // ionic导航参数
-        public viewCtrl: ViewController, // ionic视图服务
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
         private popOver: PopOverService,
         private rest: RestProvider
     ) {
@@ -45,7 +46,7 @@ export class RegisterPage {
         this.parentPage = this.navCtrl.getPrevious(this.viewCtrl).instance;
     }
 
-    // 注册
+    /**注册 */
     register() {
         let loader = this.popOver.loading({ content: '玩命注册中...' });
         let param: any = {};
@@ -77,12 +78,12 @@ export class RegisterPage {
         })
     }
 
-    // 跳转到登录
+    /**跳转到登录 */
     navLogin() {
         let result: PageResult = {
             result: 1,
             message: '已有账号，跳转到登录'
-        }
+        };
         this.parentPage.afterRegister(result);
         this.navCtrl.pop();
     }

@@ -8,6 +8,7 @@ import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
+import { avatarPath } from '../../../common/assets';
 
 declare let cordova: any;
 
@@ -25,30 +26,25 @@ declare let cordova: any;
 })
 export class UpdateAvatarPage {
 
+    /**已登录的用户ID，登录token证书 */
     userId: string = null;
 
-    UpdateAvatar = {
-        nickname: '未登录',
-        avatar: '../../assets/imgs/avatar.png'
-    }
-    avatar = `../../assets/imgs/avatar.png?${Math.random()}`;
+    /**默认的头像路径 */
+    avatar = `${avatarPath}?${Math.random()}`;
 
-    random = Math.random;
-
+    /**选中后要展示的图片 */
     lastImg: any = null;
+
+    /**选中的图片 */
     lastImgURL: string = null;
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private platform: Platform,
         private storage: Storage,
-        private rest: RestProvider,
-        private viewCtrl: ViewController,
         private popOver: PopOverService,
         private actionSheetCtrl: ActionSheetController,
         private file: File,
-        private filePath: FilePath,
         private fileTransfer: FileTransfer,
         private camera: Camera) {
     }
@@ -59,9 +55,7 @@ export class UpdateAvatarPage {
         })
     }
 
-    navUpdateAvatar() {
-    }
-
+    /**打开菜单按钮 */
     showActionSheet() {
         const actionSheet = this.actionSheetCtrl.create({
             title: '选择头像来源',
@@ -91,22 +85,7 @@ export class UpdateAvatarPage {
         actionSheet.present();
     }
 
-    update() {
-        // this.storage.get('userId').then((data)=>{
-        //     let loader = this.popOver.loading({content:'努力保存中...'});
-        //     this.rest.updateUserInfo({
-        //         userId:data,
-        //         nickname:this.UpdateAvatar.nickname
-        //     }).subscribe((res)=>{
-        //         loader.dismiss();
-        //         if(res.Status = 'OK'){
-        //             this.popOver.toast({message:'保存成功'});
-        //             this.navCtrl.pop();
-        //         }
-        //     })
-        // })
-    }
-
+    /**选择照片 */
     tackePicture(sourceType) {
         let options: CameraOptions = {
             quality: 100,
@@ -119,16 +98,21 @@ export class UpdateAvatarPage {
         this.camera.getPicture(options).then((imgPath) => {
 
             let resPath, resName;
+
             // 得到正确图片的路径
             resPath = imgPath.substr(0, imgPath.lastIndexOf('/') + 1);
+
             // 得到正确的图片文件名。
             resName = imgPath.substring(imgPath.lastIndexOf('/') + 1);
+
+            /**缓存图片 */
             this.copyFileToLocal(resPath, resName, this.createName());
         }, error => {
             this.popOver.toast({ message: '请在app中操作或检查app相关权限' });
         })
     }
 
+    /**缓存图片至APP缓存 */
     copyFileToLocal(path, name, resultName) {
         this.file.copyFile(path, name, this.file.dataDirectory, resultName).then((res) => {
             this.lastImgURL = res.toURL();
@@ -144,10 +128,12 @@ export class UpdateAvatarPage {
         });
     }
 
+    /**生成一个头像的文件名 */
     createName() {
         return `${(new Date()).getTime()}.jpg`
     }
 
+    /**上传头像 */
     uploadIamge() {
         let url = 'https://imoocqa.gugujiankong.com/api/account/uploadheadface'; // 上传请求地址
         let targetPath = this.lastImgURL; // 最终文件路径

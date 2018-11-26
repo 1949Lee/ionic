@@ -20,16 +20,23 @@ import { PageResult } from '../../../common/utils/interface';
 })
 export class LoginPage {
 
-    loginForm: FormGroup; // 登录form
+    /**登录form */
+    loginForm: FormGroup;
     formBuilder: FormBuilder = new FormBuilder();
 
     constructor(
-        public navCtrl: NavController, // ionic导航服务
-        public navParams: NavParams,  // ionic导航参数
-        public viewCtrl: ViewController, // ionic视图服务
-        private storage: Storage, // ionic存储
-        public rest: RestProvider, // rest服务
-        private popover:PopOverService // 公共弹出服务
+        /**ionic导航服务 */
+        public navCtrl: NavController,
+        /**ionic导航参数 */
+        public navParams: NavParams,
+        /**ionic视图服务 */
+        public viewCtrl: ViewController,
+        /**ionic存储 */
+        private storage: Storage,
+        /**rest服务 */
+        public rest: RestProvider,
+        /**公共弹出服务 */
+        private popover: PopOverService
     ) {
         this.loginForm = this.formBuilder.group({
             userPhone: ['', [Validators.required]],// 登录手机号
@@ -40,10 +47,10 @@ export class LoginPage {
     ionViewDidLoad() {
     }
 
-    ionViewWillEnter(){
+    ionViewWillEnter() {
     }
 
-    // 登录
+    /**登录 */
     login() {
         console.log(this.loginForm.value);
         let loader: Loading = this.popover.loading({
@@ -59,13 +66,13 @@ export class LoginPage {
         this.rest.login(param).subscribe((data) => {
             console.log(data);
             loader.dismiss();
-            if(data.Status === 'OK'){
+            if (data.Status === 'OK') {
                 // 跳转登陆后界面
-                this.storage.set('userId',data.UserId);
+                this.storage.set('userId', data.UserId);
                 this.viewCtrl.dismiss({ result: 0, message: '用户登录成功' });
             } else {
                 this.popover.toast({
-                    message:data.StatusContent
+                    message: data.StatusContent
                 });
             }
         }, (error) => {
@@ -74,20 +81,20 @@ export class LoginPage {
         })
     }
 
-    // 导航到注册页面
+    /**导航到注册页面 */
     navRegister() {
         this.navCtrl.push('RegisterPage');
     }
 
-    // 在注册界面pop之前调用
-    afterRegister(data:PageResult){
-        if(data&&data.data){
+    /**在注册界面pop之前调用 */
+    afterRegister(data: PageResult) {
+        if (data && data.data) {
             this.loginForm.patchValue(data.data);
             this.login();
         }
     }
 
-    // 取消并返回
+    /**取消并返回 */
     dismiss() {
         this.viewCtrl.dismiss({ result: 1, message: '用户取消，未登录' } as PageResult);
     }
