@@ -30,18 +30,18 @@ export class MorePage {
 
     /**用户信息 */
     userInfo = {
-        nickname:'未登录',
-        avatar:null,
+        nickname: '未登录',
+        avatar: null,
     }
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         public modalCtrl: ModalController,
-        private storage:Storage,
-        private rest:RestProvider,
-        private popOver:PopOverService
-        ) {
+        private storage: Storage,
+        private rest: RestProvider,
+        private popOver: PopOverService
+    ) {
     }
 
     ionViewDidLoad() {
@@ -79,23 +79,23 @@ export class MorePage {
         });
     }
 
-    navToUserInfo(){
+    navToUserInfo() {
         this.navCtrl.push('UserInfoPage');
     }
 
-    ionViewDidEnter(){
+    ionViewDidEnter() {
         this.storage.get('userId').then((value) => {
             console.log(value);
-            if(value){
+            if (value) {
                 this.isLogined = true;
-                this.rest.getUserInfo({userId:value}).subscribe((data) => {
+                this.rest.getUserInfo({ userId: value }).subscribe((data) => {
                     console.log(data);
-                    if(data.Status === 'OK'){
+                    if (data.Status === 'OK') {
                         this.userInfo.avatar = data.UserHeadface;
                         this.userInfo.nickname = data.UserNickName;
                         this.avatar = `${data.UserHeadface}?${Math.random()}`
                     } else {
-                        this.popOver.toast({message:data.StatusContent});
+                        this.popOver.toast({ message: data.StatusContent });
                     }
                 });
             } else {
