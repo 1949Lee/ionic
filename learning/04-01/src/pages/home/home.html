@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-searchbar (ionInput)="search($event)" placeholder="搜索：今日热门"></ion-searchbar>
         <ion-buttons end>
-            <button class="search-header-button ask" ion-button icon-only>
+            <button class="search-header-button ask" ion-button icon-only (click)="nav('question')">
                 <ion-icon name="text"></ion-icon>
             </button>
         </ion-buttons>
@@ -13,18 +13,18 @@
     <ion-grid class="tab-menus">
         <ion-row>
             <ion-col col-4 text-center>
-                <div class="tab" (tap)="nav()">
+                <div class="tab" (tap)="nav('question')">
                     <ion-icon name="create"></ion-icon> 提问
                 </div>
             </ion-col>
             <ion-col col-4 text-center>
-                <div class="tab" (tap)="nav()">
+                <div class="tab" (tap)="nav('answer')">
                     <span class="tab-divider">|</span>
                     <ion-icon name="albums"></ion-icon> 回答
                 </div>
             </ion-col>
             <ion-col col-4 text-center>
-                <div class="tab" (tap)="nav()">
+                <div class="tab" (tap)="nav('share')">
                     <span class="tab-divider">|</span>
                     <ion-icon name="share-alt"></ion-icon> 分享
                 </div>

@@ -6,11 +6,13 @@ import { HomeModule } from '../home/home.module';
 import { DiscoveryPageModule } from '../discovery/discovery.module';
 import { ChatPageModule } from '../chat/chat.module';
 import { NotificationPageModule } from '../notification/notification.module';
+import { QuestionPageModule } from '../question/question.module';
 
 @NgModule({
     declarations: [TabsPage],
     imports: [
         HomeModule,
+        QuestionPageModule,
         DiscoveryPageModule,
         ChatPageModule,
         NotificationPageModule,
@@ -20,6 +22,7 @@ import { NotificationPageModule } from '../notification/notification.module';
     exports: [
         TabsPage,
         HomeModule,
+        QuestionPageModule,
         DiscoveryPageModule,
         ChatPageModule,
         NotificationPageModule,

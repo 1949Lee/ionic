@@ -69,7 +69,6 @@ export class MorePage {
         let result: Modal = this.modalCtrl.create('LoginPage');
         result.present();
         result.onDidDismiss((data) => {
-            console.log(data);
             if (data && data.result === 0) {
                 // 用户登录成功
                 this.isLogined = true;
