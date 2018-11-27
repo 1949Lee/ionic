@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage, Tabs } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,8 +8,14 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 export class HomePage {
 
-    constructor(public navCtrl: NavController) {
+    constructor(
+        public navCtrl: NavController,
+    ) {
 
+    }
+
+    nav() {
+        // (this.navCtrl.parent as Tabs).select(2);
     }
 
 }
