@@ -24,15 +24,17 @@
 
 <ion-content padding>
     <ion-list inset>
-        <ion-item no-padding>
-            <ion-input type="text" placeholder="请输入问题简要描述"></ion-input>
-        </ion-item>
-        <ion-item no-padding>
-            <ion-textarea type="text" placeholder="问题正文" rows="7"></ion-textarea>
-        </ion-item>
+        <form [formGroup]="questionForm">
+            <ion-item no-padding>
+                <ion-input type="text" formControlName="title" placeholder="请输入问题简要描述"></ion-input>
+            </ion-item>
+            <ion-item no-padding>
+                <ion-textarea type="text" formControlName="content" placeholder="问题正文" rows="7"></ion-textarea>
+            </ion-item>
+        </form>
     </ion-list>
 
     <!--提交按钮 -->
-    <button ion-button block (click)="submit()">提交问题</button>
-    <!-- <button ion-button block (click)="submit()" [disabled]="!loginForm.valid">提交问题</button> -->
+    <!-- <button ion-button block (click)="submit()">提交问题</button> -->
+    <button ion-button block (click)="submit()" [disabled]="!questionForm.valid">提交问题</button>
 </ion-content>
