@@ -26,7 +26,11 @@ export class QuestionPage {
 
     /**提交问题 */
     submit() {
-
+        const data = {
+            userid:'',
+            title:'',
+            content:'',
+        }
     }
 
 }

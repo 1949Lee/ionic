@@ -24,7 +24,7 @@ export class RestProvider {
     //   private apiGetUserQuestionList = "https://imoocqa.gugujiankong.com/api/account/getuserquestionlist";
 
     //question
-    //   private apiUrlQuestionSave = 'https://imoocqa.gugujiankong.com/api/question/save';
+      private apiUrlQuestionSave = 'https://imoocqa.gugujiankong.com/api/question/save';
     //   private apiUrlQuestionList = 'https://imoocqa.gugujiankong.com/api/question/list?index=1&number=10';
     //   private apiUrlGetQuestion = "https://imoocqa.gugujiankong.com/api/question/get";
     //   private apiUrlGetQuestionWithUser = "https://imoocqa.gugujiankong.com/api/question/getwithuser";
@@ -56,10 +56,14 @@ export class RestProvider {
     }
 
     /**
-     * 获取用户信息
+     * 更新用户信息
      */
     updateUserInfo(data): Observable<{ [key: string]: any }> {
         return this.getUrlReturn(this.apiUrlUpdateNickName,data);
+    }
+
+    saveQuestion(data): Observable<{ [key: string]: any }> {
+        return this.getUrlReturn(this.apiUrlQuestionSave,data);
     }
 
     constructor(public http: HttpClient) { }
