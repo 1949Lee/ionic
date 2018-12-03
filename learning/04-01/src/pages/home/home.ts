@@ -77,4 +77,8 @@ export class HomePage {
         });
     }
 
+    navDetails(id) {
+        this.navCtrl.push('DetailsPage',{id});
+    }
+
 }

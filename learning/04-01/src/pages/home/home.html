@@ -32,7 +32,7 @@
         </ion-row>
     </ion-grid>
 
-    <ion-card class="qusetion-wrapper" *ngFor="let question of questionList">
+    <ion-card class="qusetion-wrapper" *ngFor="let question of questionList" (click)="navDetails(question.IdentityId)">
         <!-- 谁回答了这个问题 -->
         <ion-item>
             <ion-avatar item-start>

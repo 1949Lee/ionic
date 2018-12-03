@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RestProvider } from '../../../providers/rest/rest';
 
 /**
  * Generated class for the DetailsPage page.
@@ -15,7 +16,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DetailsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+      public navCtrl: NavController,
+      public navParams: NavParams,
+      private rest:RestProvider) {
+      this.rest.getQuestion({id:this.navParams.data.id}).subscribe((question) => {
+          console.log(question);
+      });
   }
 
   ionViewDidLoad() {
