@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-searchbar (ionInput)="search($event)" placeholder="搜索：今日热门"></ion-searchbar>
         <ion-buttons end>
-            <button class="search-header-button ask" ion-button icon-only (click)="nav('question')">
+            <button class="search-header-button ask" ion-button icon-only (click)="navTabTo(2)">
                 <ion-icon name="text"></ion-icon>
             </button>
         </ion-buttons>
@@ -31,4 +31,51 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+
+    <ion-card class="qusetion-wrapper" *ngFor="let question of questionList" (click)="navDetails(question.IdentityId)">
+        <!-- 谁回答了这个问题 -->
+        <ion-item>
+            <ion-avatar item-start>
+                <img [src]="question.HeadFace">
+            </ion-avatar>
+            <ion-note>{{question.UserNickName}}回答了这个问题</ion-note>
+            <button class="qusetion-details" ion-button float-end clear no-margin>
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-item>
+
+        <!-- 问题标题 -->
+        <ion-card-header>
+           {{question.ContentTitle}}
+        </ion-card-header>
+
+        <!-- <img [src]="avatarPath"> -->
+
+        <!-- 问题内容 -->
+        <ion-card-content>
+            <p>{{question.ContentSummary}}</p>
+        </ion-card-content>
+
+        <!-- 问题关注情况 -->
+        <ion-row>
+            <ion-col>
+                <ion-note>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    {{question.LikeCount}}&nbsp;赞同
+                </ion-note>
+            </ion-col>
+            <ion-col>
+                <ion-note>
+                    <ion-icon name="text"></ion-icon>
+                    {{question.CommentCount}}&nbsp;评论
+                </ion-note>
+            </ion-col>
+            <ion-col align-self-center text-center>
+                <ion-note>
+                    关注问题
+                </ion-note>
+            </ion-col>
+        </ion-row>
+
+    </ion-card>
 </ion-content>

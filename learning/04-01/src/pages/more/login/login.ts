@@ -78,7 +78,7 @@ export class LoginPage {
         }, (error) => {
             loader.dismiss();
             console.log(error);
-        })
+        });
     }
 
     /**导航到注册页面 */
