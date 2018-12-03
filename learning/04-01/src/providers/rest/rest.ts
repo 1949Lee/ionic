@@ -21,11 +21,11 @@ export class RestProvider {
     private apiUrlLogin = 'https://imoocqa.gugujiankong.com/api/account/login';
     private apiUrlUserInfo = 'https://imoocqa.gugujiankong.com/api/account/userinfo'; // userId=5ba4a2ea647eb46f607f95ab
     private apiUrlUpdateNickName = 'https://imoocqa.gugujiankong.com/api/account/updatenickname'; // userId=5ba4a2ea647eb46f607f95ab&nickname=Lee
-    //   private apiGetUserQuestionList = "https://imoocqa.gugujiankong.com/api/account/getuserquestionlist";
+    private apiGetUserQuestionList = "https://imoocqa.gugujiankong.com/api/account/getuserquestionlist";
 
     //question
-      private apiUrlQuestionSave = 'https://imoocqa.gugujiankong.com/api/question/save';
-    //   private apiUrlQuestionList = 'https://imoocqa.gugujiankong.com/api/question/list?index=1&number=10';
+    private apiUrlQuestionSave = 'https://imoocqa.gugujiankong.com/api/question/save';
+    private apiUrlQuestionList = 'https://imoocqa.gugujiankong.com/api/question/list';
     //   private apiUrlGetQuestion = "https://imoocqa.gugujiankong.com/api/question/get";
     //   private apiUrlGetQuestionWithUser = "https://imoocqa.gugujiankong.com/api/question/getwithuser";
     //   private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
@@ -38,32 +38,40 @@ export class RestProvider {
      * 登录
      */
     login(data): Observable<{ [key: string]: any }> {
-        return this.getUrlReturn(this.apiUrlLogin,data);
+        return this.getUrlReturn(this.apiUrlLogin, data);
     }
 
     /**
      * 注册
      */
     register(data): Observable<{ [key: string]: any }> {
-        return this.getUrlReturn(this.apiUrlRegister,data);
+        return this.getUrlReturn(this.apiUrlRegister, data);
     }
 
     /**
      * 获取用户信息
      */
     getUserInfo(data): Observable<{ [key: string]: any }> {
-        return this.getUrlReturn(this.apiUrlUserInfo,data);
+        return this.getUrlReturn(this.apiUrlUserInfo, data);
     }
 
     /**
      * 更新用户信息
      */
     updateUserInfo(data): Observable<{ [key: string]: any }> {
-        return this.getUrlReturn(this.apiUrlUpdateNickName,data);
+        return this.getUrlReturn(this.apiUrlUpdateNickName, data);
     }
 
     saveQuestion(data): Observable<{ [key: string]: any }> {
-        return this.getUrlReturn(this.apiUrlQuestionSave,data);
+        return this.getUrlReturn(this.apiUrlQuestionSave, data);
+    }
+
+    getQuestionList(data): Observable<any[]> {
+        return this.getUrlReturn(this.apiUrlQuestionList, data);
+    }
+
+    getUserQuestionList(data): Observable<any[]> {
+        return this.getUrlReturn(this.apiGetUserQuestionList,data);
     }
 
     constructor(public http: HttpClient) { }
@@ -75,13 +83,13 @@ export class RestProvider {
      * @param {string} url 入参api的URL
      * @returns {Observable<any>} 返回字符串数组
      */
-    private getUrlReturn(url: string,data:any): Observable<any> {
+    private getUrlReturn(url: string, data: any): Observable<any> {
         let param = '?';
-        for( let [key,value] of Object.entries(data)){
+        for (let [key, value] of Object.entries(data)) {
             param += `${key}=${value}&`;
         }
-        param = param.slice(0,-1);
-        return this.http.get<string>(url+param).pipe(
+        param = param.slice(0, -1);
+        return this.http.get<string>(url + param).pipe(
             map(data => { return JSON.parse(data); }),
             catchError(this.handleError(url, []))
         );

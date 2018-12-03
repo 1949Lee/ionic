@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, Tabs, ModalController, Modal } from 'ionic-angular';
-import { QuestionPage } from '../question/question';
+import { NavController, IonicPage, Tabs, ModalController, Modal, Loading } from 'ionic-angular';
+import { QuestionPage } from './question/question';
 import { PageResult } from '../../common/utils/interface';
+import { avatarPath } from '../../common/assets';
+import { RestProvider } from '../../providers/rest/rest';
+import { PopOverService } from '../../share/service/pop-over.service';
 
 @IonicPage()
 @Component({
@@ -10,16 +13,38 @@ import { PageResult } from '../../common/utils/interface';
 })
 export class HomePage {
 
+    avatarPath: string = avatarPath;
+
+    questionList:any[] = null;
+
     constructor(
         private navCtrl: NavController,
-        private modalCtrl: ModalController
+        private modalCtrl: ModalController,
+        private rest: RestProvider,
+        private popOver: PopOverService
     ) {
 
     }
 
+    ionViewDidLoad() {
+        this.getQUestionList();
+    }
+
+    getQUestionList() {
+        let loading: Loading = this.popOver.loading({ content: '拼命加载中' });
+        this.rest.getQuestionList({ index: 1, number: 10 }).subscribe((data) => {
+            loading.dismiss();
+            console.log(data);
+            if(data !== null && data.length > 0){
+                this.questionList = data;
+            } else {
+                this.questionList = null;
+            }
+        });
+    }
+
     /**导航 */
     nav(id: string) {
-        // (this.navCtrl.parent as Tabs).select(2);
         switch (id) {
             case 'question':
                 this.navQuestion();
@@ -33,6 +58,10 @@ export class HomePage {
             default:
                 break;
         }
+    }
+
+    navTabTo(index: number) {
+        (this.navCtrl.parent as Tabs).select(index);
     }
 
     /**弹出提问页面 */
