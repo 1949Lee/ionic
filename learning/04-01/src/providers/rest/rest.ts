@@ -26,7 +26,7 @@ export class RestProvider {
     //question
     private apiUrlQuestionSave = 'https://imoocqa.gugujiankong.com/api/question/save';
     private apiUrlQuestionList = 'https://imoocqa.gugujiankong.com/api/question/list';
-      private apiUrlGetQuestion = "https://imoocqa.gugujiankong.com/api/question/get";
+    private apiUrlGetQuestion = "https://imoocqa.gugujiankong.com/api/question/get";
     //   private apiUrlGetQuestionWithUser = "https://imoocqa.gugujiankong.com/api/question/getwithuser";
     //   private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
     //   private apiUrlSaveFavourite = "https://imoocqa.gugujiankong.com/api/question/savefavourite";
