@@ -6,20 +6,117 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>details</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>问题详情</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    标签
-    标题
-    正文            （展开收起）
-    关注 评论 关注问题（展开收起）
-    邀请回答 写回答
-    查看全部XXX个回答
-    回答
+    <ion-card class="question">
+        <ion-scroll scrollX="true" class="tags-wrapper">
+            <div class="wrapper" padding-horizontal>
+                <span class="tag">
+                    互联网
+                </span>
+                <span class="tag">
+                    职业规划
+                </span>
+                <span class="tag">
+                    创业
+                </span>
+                <span class="tag">
+                    JAVA
+                </span>
+                <span class="tag">
+                    Go
+                </span>
+                <span class="tag">
+                    爬虫
+                </span>
+                <span class="tag">
+                    中年
+                </span>
+            </div>
+        </ion-scroll>
+        <ion-card-header class="title" padding-horizontal>
+            {{question?.ContentTitle}}
+        </ion-card-header>
+
+        <!-- 正文 （展开收起） -->
+        <ion-card-content>
+            <p>{{'富强民主文明和谐自由平等公正法治爱国敬业诚信友善'}}</p>
+        </ion-card-content>
+        <!-- 关注 评论 关注问题 -->
+        <div text-right padding-horizontal>
+            <button ion-button small icon-start color="light" *ngIf="question?.IsFavourite">
+                <ion-icon name="checkmark"></ion-icon>
+                <span>已关注</span>
+            </button>
+            <button ion-button small icon-start color="primary" *ngIf="!question?.IsFavourite">
+                <ion-icon name="add"></ion-icon>
+                <span>关注问题</span>
+            </button>
+        </div>
+        <ion-row padding-horizontal>
+            <ion-col col-6>
+                <ion-note>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    {{question?.LikeCount}}&nbsp;赞同
+                </ion-note>
+                <ion-note>
+                    <ion-icon name="text"></ion-icon>
+                    {{question?.CommentCount}}&nbsp;评论
+                </ion-note>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="button-group">
+            <ion-col class="button" col-6 text-center>
+                <ion-icon name="add"></ion-icon>
+                <span>邀请回答</span>
+            </ion-col>
+            <ion-col class="button" col-6 text-center>
+                <ion-icon name="add"></ion-icon>
+                <span>写回答</span>
+            </ion-col>
+        </ion-row>
+        <!-- 邀请回答 写回答 -->
+        <!-- 查看全部XXX个回答 -->
+    </ion-card>
+    <ion-card class="answer-wrapper" *ngFor="let answer of answerList">
+        <!-- 谁回答了这个问题 -->
+        <ion-item>
+            <ion-avatar item-start>
+                <img [src]="avatarPath">
+            </ion-avatar>
+            <ion-note>{{'91Lee先生'}}</ion-note>
+            <button class="answer-details" ion-button float-end clear no-margin>
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-item>
+        <!-- <img [src]="avatarPath"> -->
+
+        <!-- 回答内容 -->
+        <ion-card-content>
+            <p>{{'富强民主文明和谐自由平等公正法治爱国敬业诚信友善'}}</p>
+        </ion-card-content>
+
+        <!-- 回答情况 -->
+        <ion-row>
+            <ion-col>
+                <ion-note>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    赞同&nbsp;18k
+                </ion-note>
+            </ion-col>
+            <ion-col align-self-center text-right>
+                <ion-note>
+                    感谢 收藏 评论
+                </ion-note>
+            </ion-col>
+        </ion-row>
+    </ion-card>
 
 </ion-content>

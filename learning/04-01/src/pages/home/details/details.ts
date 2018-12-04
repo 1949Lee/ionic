@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../../providers/rest/rest';
+import { avatarPath } from '../../../common/assets';
 
 /**
  * Generated class for the DetailsPage page.
@@ -11,22 +12,29 @@ import { RestProvider } from '../../../providers/rest/rest';
 
 @IonicPage()
 @Component({
-  selector: 'page-details',
-  templateUrl: 'details.html',
+    selector: 'page-details',
+    templateUrl: 'details.html',
 })
 export class DetailsPage {
 
-  constructor(
-      public navCtrl: NavController,
-      public navParams: NavParams,
-      private rest:RestProvider) {
-      this.rest.getQuestion({id:this.navParams.data.id}).subscribe((question) => {
-          console.log(question);
-      });
-  }
+    avatarPath: string = avatarPath;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailsPage');
-  }
+    question:any = null;
+
+    answerList:any = [{}];
+
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private rest: RestProvider) {
+        this.rest.getQuestion({ id: this.navParams.data.id }).subscribe((question) => {
+            console.log(question);
+            this.question = question;
+        });
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad DetailsPage');
+    }
 
 }
