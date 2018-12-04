@@ -3,38 +3,51 @@ page-details {
         margin: 0px;
         width: 100%;
         box-shadow: none;
+
         .tags-wrapper {
             height: 2rem;
-            margin:0px 0px 0.3rem 0px;
-            .wrapper{
+            margin: 0px 0px 0.3rem 0px;
+
+            .wrapper {
                 .tag {
                     display: inline-block;
                     white-space: nowrap;
                     padding: 2px;
                     border-radius: 2px;
                     background: #dddcdc;
-                    margin:0 0.1rem;
+                    margin: 0 0.1rem;
                     box-sizing: border-box;
                     color: $note-color;
-                    &:first-child{
+
+                    &:first-child {
                         margin-left: 0px;
                     }
-                    &:last-child{
+
+                    &:last-child {
                         margin-left: 0px;
                     }
                 }
             }
         }
-        .title{
+
+        .title {
             // font-size: 2rem;
         }
+
         .button-group {
             border-top: 1px solid #dddcdc;
-            .button{
-                color:$primary-color;
+
+            .button {
+                color: $primary-color;
                 border-right: 1px solid #dddcdc;
-                &:last-child{
+
+                &:last-child {
                     border-right: none;
+                }
+
+                .icon {
+                    vertical-align: middle;
+                    margin-top:-.3rem;
                 }
             }
         }
@@ -44,9 +57,11 @@ page-details {
         margin: 5px 0px;
         width: 100%;
         box-shadow: none;
-        .answer-details{
-            color:$note-color
+
+        .answer-details {
+            color: $note-color
         }
+
         .row {
             margin: 0px 11px;
         }
