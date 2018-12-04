@@ -15,30 +15,14 @@
 
 <ion-content>
     <ion-card class="question">
-        <ion-scroll scrollX="true" class="tags-wrapper">
+        <ion-scroll *ngIf="tags.length > 0" scrollX="true" class="tags-wrapper">
+            <!-- <span class="effect start" float-start>&nbsp;</span> -->
             <div class="wrapper" padding-horizontal>
-                <span class="tag">
-                    互联网
-                </span>
-                <span class="tag">
-                    职业规划
-                </span>
-                <span class="tag">
-                    创业
-                </span>
-                <span class="tag">
-                    JAVA
-                </span>
-                <span class="tag">
-                    Go
-                </span>
-                <span class="tag">
-                    爬虫
-                </span>
-                <span class="tag">
-                    中年
+                <span class="tag" *ngFor="let tag of tags">
+                    {{tag}}
                 </span>
             </div>
+            <!-- <span class="effect end" float-end>&nbsp;</span> -->
         </ion-scroll>
         <ion-card-header class="title" padding-horizontal>
             {{question?.ContentTitle}}

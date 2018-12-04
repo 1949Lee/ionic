@@ -17,11 +17,17 @@ import { avatarPath } from '../../../common/assets';
 })
 export class DetailsPage {
 
+    // 默认图片路径
     avatarPath: string = avatarPath;
 
+    // 问题
     question:any = null;
 
-    answerList:any = [{}];
+    // 回答列表
+    answerList:any = [];
+
+    // 标签数组
+    tags: string[] = ['旅行','高铁','自助游','欧洲','X 是种怎样的体验','俄罗斯'];
 
     constructor(
         public navCtrl: NavController,

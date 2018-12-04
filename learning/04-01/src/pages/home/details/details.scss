@@ -5,17 +5,36 @@ page-details {
         box-shadow: none;
 
         .tags-wrapper {
-            height: 2rem;
-            margin: 0px 0px 0.3rem 0px;
+            height: 3.4rem;
+            margin-bottom: -10px;
+
+            .effect {
+                white-space: nowrap;
+                border-radius: 2px;
+                margin: 0px 16px;
+                width: 50px;
+                height: 3.4rem;
+                display: inline-block;
+                position: absolute;
+                &.start{
+                    background: linear-gradient(90deg, #ffffff, transparent);
+                }
+                &.end {
+                    background: linear-gradient(270deg, #ffffff, transparent);
+                }
+            }
 
             .wrapper {
+                display: inline-block;
+                white-space: nowrap;
+
                 .tag {
                     display: inline-block;
                     white-space: nowrap;
-                    padding: 2px;
+                    padding: 0.4rem;
                     border-radius: 2px;
                     background: #dddcdc;
-                    margin: 0 0.1rem;
+                    margin: 0.3rem 0.3rem;
                     box-sizing: border-box;
                     color: $note-color;
 
@@ -24,7 +43,7 @@ page-details {
                     }
 
                     &:last-child {
-                        margin-left: 0px;
+                        margin-right: 0px;
                     }
                 }
             }
@@ -47,7 +66,7 @@ page-details {
 
                 .icon {
                     vertical-align: middle;
-                    margin-top:-.3rem;
+                    margin-top: -.3rem;
                 }
             }
         }
