@@ -27,9 +27,9 @@ export class RestProvider {
     private apiUrlQuestionSave = 'https://imoocqa.gugujiankong.com/api/question/save';
     private apiUrlQuestionList = 'https://imoocqa.gugujiankong.com/api/question/list';
     private apiUrlGetQuestion = "https://imoocqa.gugujiankong.com/api/question/get";
-    //   private apiUrlGetQuestionWithUser = "https://imoocqa.gugujiankong.com/api/question/getwithuser";
+    private apiUrlGetQuestionWithUser = "https://imoocqa.gugujiankong.com/api/question/getwithuser";
     //   private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
-    //   private apiUrlSaveFavourite = "https://imoocqa.gugujiankong.com/api/question/savefavourite";
+    private apiUrlSaveFavourite = "https://imoocqa.gugujiankong.com/api/question/savefavourite";
 
     //notification
     //   private apiUrlUserNotifications = "https://imoocqa.gugujiankong.com/api/account/usernotifications";
@@ -71,11 +71,19 @@ export class RestProvider {
     }
 
     getUserQuestionList(data): Observable<any[]> {
-        return this.getUrlReturn(this.apiGetUserQuestionList,data);
+        return this.getUrlReturn(this.apiGetUserQuestionList, data);
     }
 
     getQuestion(data): Observable<{ [key: string]: any }> {
-        return this.getUrlReturn(this.apiUrlGetQuestion,data);
+        return this.getUrlReturn(this.apiUrlGetQuestion, data);
+    }
+
+    markQuestion(data): Observable<{ [key: string]: any }> {
+        return this.getUrlReturn(this.apiUrlSaveFavourite, data);
+    }
+
+    getQuestionWithUser(data): Observable<{ [key: string]: any }> {
+        return this.getUrlReturn(this.apiUrlGetQuestionWithUser, data);
     }
 
     constructor(public http: HttpClient) { }

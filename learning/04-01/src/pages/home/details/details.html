@@ -30,15 +30,15 @@
 
         <!-- 正文 （展开收起） -->
         <ion-card-content>
-            <p>{{'富强民主文明和谐自由平等公正法治爱国敬业诚信友善'}}</p>
+            <p>{{question?.Content}}</p>
         </ion-card-content>
         <!-- 关注 评论 关注问题 -->
         <div text-right padding-horizontal>
-            <button ion-button small icon-start color="light" *ngIf="question?.IsFavourite">
+            <button ion-button small icon-start color="light" (click)="markQuestion()" *ngIf="question?.IsFavourite">
                 <ion-icon name="checkmark"></ion-icon>
                 <span>已关注</span>
             </button>
-            <button ion-button small icon-start color="primary" *ngIf="!question?.IsFavourite">
+            <button ion-button small icon-start color="primary" (click)="markQuestion()" *ngIf="!question?.IsFavourite">
                 <ion-icon name="add"></ion-icon>
                 <span>关注问题</span>
             </button>
@@ -67,15 +67,14 @@
             </ion-col>
         </ion-row>
         <!-- 邀请回答 写回答 -->
-        <!-- 查看全部XXX个回答 -->
     </ion-card>
     <ion-card class="answer-wrapper" *ngFor="let answer of answerList">
         <!-- 谁回答了这个问题 -->
         <ion-item>
             <ion-avatar item-start>
-                <img [src]="avatarPath">
+                <img [src]="answer.HeadFace">
             </ion-avatar>
-            <ion-note>{{'91Lee先生'}}</ion-note>
+            <ion-note>{{answer.UserNickName}}</ion-note>
             <button class="answer-details" ion-button float-end clear no-margin>
                 <ion-icon name="more"></ion-icon>
             </button>
@@ -84,7 +83,7 @@
 
         <!-- 回答内容 -->
         <ion-card-content>
-            <p>{{'富强民主文明和谐自由平等公正法治爱国敬业诚信友善'}}</p>
+            <p>{{answer.Content}}</p>
         </ion-card-content>
 
         <!-- 回答情况 -->
