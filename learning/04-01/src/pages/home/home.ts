@@ -5,6 +5,7 @@ import { PageResult } from '../../common/utils/interface';
 import { avatarPath } from '../../common/assets';
 import { RestProvider } from '../../providers/rest/rest';
 import { PopOverService } from '../../share/service/pop-over.service';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -12,6 +13,8 @@ import { PopOverService } from '../../share/service/pop-over.service';
     templateUrl: 'home.html'
 })
 export class HomePage {
+
+    userId: string = '';
 
     avatarPath: string = avatarPath;
 
@@ -21,18 +24,22 @@ export class HomePage {
         private navCtrl: NavController,
         private modalCtrl: ModalController,
         private rest: RestProvider,
+        private storage: Storage,
         private popOver: PopOverService
     ) {
 
+        this.storage.get('userId').then((val) => {
+            this.userId = val;
+            this.getQuestionList();
+        })
     }
 
     ionViewDidLoad() {
-        this.getQUestionList();
     }
 
-    getQUestionList() {
+    getQuestionList() {
         let loading: Loading = this.popOver.loading({ content: '拼命加载中' });
-        this.rest.getQuestionList({ index: 1, number: 10 }).subscribe((data) => {
+        this.rest.getUserQuestionList({userid:this.userId,type:'question', index: 1, number: 10 }).subscribe((data) => {
             loading.dismiss();
             console.log(data);
             if(data !== null && data.length > 0){
