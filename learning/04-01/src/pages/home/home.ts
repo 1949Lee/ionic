@@ -37,6 +37,11 @@ export class HomePage {
     ionViewDidLoad() {
     }
 
+    doMoreTap(e:Event){
+        e.stopPropagation();
+        console.log('更多按钮点击了');
+    }
+
     getQuestionList() {
         let loading: Loading = this.popOver.loading({ content: '拼命加载中' });
         // this.rest.getUserQuestionList({userid:this.userId,type:'question', index: 1, number: 10 }).subscribe((data) => {

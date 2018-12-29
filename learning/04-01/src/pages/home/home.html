@@ -34,12 +34,12 @@
 
     <ion-card class="qusetion-wrapper" *ngFor="let question of questionList" (click)="navDetails(question.IdentityId)">
         <!-- 谁回答了这个问题 -->
-        <ion-item>
+        <ion-item class="question-tips">
             <ng-container *ngIf="question.Answer && question.Answer.length > 0; else elseTemplate">
                 <ion-avatar item-start>
                     <img [src]="question.Answer[0].HeadFace">
                 </ion-avatar>
-                <ion-note>{{question.Answer[0].UserNickName}}回答了这个问题</ion-note>
+                <ion-note item-start>{{question.Answer[0].UserNickName}}回答了这个问题</ion-note>
             </ng-container>
             <ng-template #elseTemplate>
                 <ion-avatar item-start>
@@ -47,7 +47,7 @@
                 </ion-avatar>
                 <ion-note>{{question.UserNickName}}提出了这个问题</ion-note>
             </ng-template>
-            <button class="qusetion-details" ion-button float-end clear no-margin>
+            <button class="qusetion-details" ion-button item-end clear no-margin (click)="doMoreTap($event)">
                 <ion-icon name="more"></ion-icon>
             </button>
         </ion-item>
@@ -71,14 +71,16 @@
                     <ion-icon name="thumbs-up"></ion-icon>
                     {{question.LikeCount}}&nbsp;赞同
                 </ion-note>
-            </ion-col>
-            <ion-col>
+                <ion-note>
+                    ·
+                </ion-note>
+
                 <ion-note>
                     <ion-icon name="text"></ion-icon>
                     {{question.CommentCount}}&nbsp;评论
                 </ion-note>
             </ion-col>
-            <ion-col align-self-center text-center>
+            <ion-col align-self-center text-right>
                 <ion-note>
                     关注问题
                 </ion-note>

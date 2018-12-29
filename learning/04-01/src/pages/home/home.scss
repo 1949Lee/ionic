@@ -23,7 +23,23 @@ page-home {
         width: 100%;
         box-shadow: none;
         .qusetion-details{
-            color:$note-color
+            color:$note-color;
+            margin: 0px;
+        }
+        .question-tips{
+            &.item-ios{
+                padding: 0px 16px;
+                .item-inner{
+                    padding-right: 0px;
+                }
+            }
+            ion-avatar{
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+        .row{
+            margin: 0px 11px;
         }
     }
 }
