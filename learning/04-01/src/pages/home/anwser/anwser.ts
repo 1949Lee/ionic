@@ -18,7 +18,6 @@ export class AnwserPage {
     formBuilder: FormBuilder = new FormBuilder();
 
     constructor(
-        private navCtrl: NavController,
         private navParams: NavParams,
         private storage: Storage,
         private viewCtrl: ViewController,
