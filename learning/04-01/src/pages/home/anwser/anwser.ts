@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Loading } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController, Loading } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { RestProvider } from '../../../providers/rest/rest';
