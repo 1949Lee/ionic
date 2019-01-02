@@ -30,6 +30,7 @@ export class RestProvider {
     private apiUrlGetQuestionWithUser = "https://imoocqa.gugujiankong.com/api/question/getwithuser";
     //   private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
     private apiUrlSaveFavourite = "https://imoocqa.gugujiankong.com/api/question/savefavourite";
+    private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
 
     //notification
     //   private apiUrlUserNotifications = "https://imoocqa.gugujiankong.com/api/account/usernotifications";
@@ -84,6 +85,10 @@ export class RestProvider {
 
     getQuestionWithUser(data): Observable<{ [key: string]: any }> {
         return this.getUrlReturn(this.apiUrlGetQuestionWithUser, data);
+    }
+
+    saveAnwser(data):Observable<{ [key: string]: any }> {
+        return this.getUrlReturn(this.apiUrlAnswer, data);
     }
 
     constructor(public http: HttpClient) { }

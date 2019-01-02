@@ -44,8 +44,8 @@ export class HomePage {
 
     getQuestionList() {
         let loading: Loading = this.popOver.loading({ content: '拼命加载中' });
-        // this.rest.getUserQuestionList({userid:this.userId,type:'question', index: 1, number: 10 }).subscribe((data) => {
-        this.rest.getQuestionList({index: 1, number: 10 }).subscribe((data) => {
+        this.rest.getUserQuestionList({userid:this.userId,type:'question', index: 1, number: 10 }).subscribe((data) => {
+        // this.rest.getQuestionList({index: 1, number: 10 }).subscribe((data) => {
             loading.dismiss();
             console.log(data);
             if(data !== null && data.length > 0){

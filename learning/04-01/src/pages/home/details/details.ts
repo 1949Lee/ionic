@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, ModalController } from 'ionic-angular';
 import { RestProvider } from '../../../providers/rest/rest';
 import { avatarPath } from '../../../common/assets';
 import { PopOverService } from '../../../share/service/pop-over.service';
 import { Storage } from '@ionic/storage';
+import { AnwserPage } from '../anwser/anwser';
 
 /**
  * Generated class for the DetailsPage page.
@@ -42,6 +43,7 @@ export class DetailsPage {
         public navParams: NavParams,
         private popover: PopOverService,
         private storage: Storage,
+        private modalCtrl: ModalController,
         private rest: RestProvider) {
             this.storage.get('userId').then((val) => {
                 this.userId = val;
@@ -80,6 +82,14 @@ export class DetailsPage {
         },error => {
             loading.dismiss();
         });
+    }
+
+    showAnwser() {
+        let modal = this.modalCtrl.create(AnwserPage,{questionId:this.questionId});
+        modal.onDidDismiss(() => {
+            this.getQuestion();
+        });
+        modal.present();
     }
 
 }
