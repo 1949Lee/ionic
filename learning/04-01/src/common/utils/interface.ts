@@ -9,4 +9,13 @@ export interface PageResult {
 
     /**传递到父页面的数据 json对象*/
     data?:{[key:string]:any}
+};
+
+/**
+ * @member pulling 下拉刷新
+ * @member ready 释放更新
+ */
+export const PageRefreshText:any = {
+    pulling: '下拉刷新',
+    ready: '释放更新'
 }
