@@ -33,7 +33,7 @@
           </button>
         </ion-col>
         <ion-col col-8>
-          <ion-textarea [(ngModel)]="messageToSend"
+          <ion-textarea [(ngModel)]="messageToSend" #sendInput (click)="handleInputClick()"
           placeholder="输入内容"></ion-textarea>
         </ion-col>
         <ion-col col-2>
@@ -43,5 +43,5 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <emoji-picker *ngIf="isShowEmojiPicker" [(ngModel)]="messageToSend"></emoji-picker>
+    <emoji-picker *ngIf="isShowEmojiPicker" [ngModel]="messageToSend" (ngModelChange)="handleEmoji($event)"></emoji-picker>
   </ion-footer>

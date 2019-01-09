@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild, ElementRef  } from '@angular/core';
+import { IonicPage, NavController, NavParams, TextInput } from 'ionic-angular';
 import { PopOverService } from '../../../share/service/pop-over.service';
 import { RestProvider } from '../../../providers/rest/rest';
 import { avatarPath } from '../../../common/assets';
@@ -11,6 +11,9 @@ import { Storage } from '@ionic/storage';
     templateUrl: 'chat-session.html',
 })
 export class ChatSessionPage {
+
+    /**消息输入框 */
+    @ViewChild('sendInput') sendInputEle:TextInput;
 
     /**会话中本人的用户ID */
     userId: string = '';
@@ -36,6 +39,9 @@ export class ChatSessionPage {
     /**输入框中未发送的消息 */
     messageToSend:string = null;
 
+    /**光标位置 */
+    focusPosition: number = null;
+
     constructor(
         private navCtrl: NavController,
         private navParams: NavParams,
@@ -47,6 +53,11 @@ export class ChatSessionPage {
     }
 
     ionViewDidLoad() {
+    }
+
+    ionViewWillLeave() {
+        this.isShowEmojiPicker = false;
+        this.focusPosition = null;
     }
 
     ionViewDidEnter() {
@@ -67,6 +78,37 @@ export class ChatSessionPage {
     /**切换表情输入框的显隐 */
     switchEmojiPicker() {
         this.isShowEmojiPicker = !this.isShowEmojiPicker;
+        let ele:HTMLTextAreaElement = this.sendInputEle._native.nativeElement;
+        if(!this.isShowEmojiPicker) {
+            if(this.focusPosition){
+                ele.selectionStart = this.focusPosition
+            } else {
+                ele.selectionStart = this.messageToSend.length;
+            }
+            this.sendInputEle.setFocus();
+        } else {
+            // this.focusPosition = ele.selectionStart;
+        }
+    }
+
+    /**处理输入框的点击 */
+    handleInputClick() {
+        // 留存光标位置
+        let ele:HTMLTextAreaElement = this.sendInputEle._native.nativeElement;
+        this.focusPosition = ele.selectionStart;
+    }
+
+    /**点击表情的处理 */
+    handleEmoji(emoji:any) {
+        if(this.focusPosition){
+            let remainMessage = this.messageToSend.slice(this.focusPosition);
+            let preMessage = this.messageToSend.slice(0,this.focusPosition);
+            this.messageToSend = preMessage + emoji +remainMessage;
+        } else {
+            this.messageToSend += emoji;
+        }
+        this.focusPosition++;
+
     }
 
     /**点击发送消息 */

@@ -36,14 +36,8 @@ export class EmojiPickerComponent implements ControlValueAccessor {
     }
     /**添加表情，点击表情后将数据反馈到组件 */
     addEmoji(val: any): any {
-        if (!this.value) {
-            this.value = val;
-        } else {
-            this.value += val;
-        }
-        if (this.value) {
-            // 点击表情后将数据反馈到组件
-            this.onChanged(this.value);
-        }
+        // 点击表情后将数据反馈到组件
+        this.onChanged(val);
+
     }
 }
