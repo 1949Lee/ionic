@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { avatarPath } from '../../common/assets';
+import { ChatSessionPage } from './chat-session/chat-session';
 
 /**
  * Generated class for the ChatPage page.
@@ -15,7 +17,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChatPage {
 
+    userinfo: Object;
+
+    /** 会话页面 */
+    chatSessionPage: any;
+    avatarPath: string = avatarPath;
+
     constructor(public navCtrl: NavController, public navParams: NavParams) {
+        // 仅做聊天逻辑展示
+        this.userinfo = {
+            userid: '123321',
+            username: '慕女神'
+        }
+        this.chatSessionPage = ChatSessionPage;
     }
 
     ionViewDidLoad() {

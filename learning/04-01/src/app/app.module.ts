@@ -15,6 +15,7 @@ import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
+import { EmojiProvider } from '../providers/emoji/emoji';
 
 @NgModule({
     declarations: [
@@ -25,8 +26,9 @@ import { FilePath } from '@ionic-native/file-path';
         TabsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        IonicModule.forRoot(MyApp,{
-            backButtonText:'返回'
+        // ShareModule,
+        IonicModule.forRoot(MyApp, {
+            backButtonText: '返回'
         }),
         IonicStorageModule.forRoot()
     ],
@@ -43,7 +45,8 @@ import { FilePath } from '@ionic-native/file-path';
         File,
         FilePath,
         FileTransfer,
-        {provide:PopOverService,useFactory:(loading,toast)=>{ return new PopOverService(loading,toast)},deps:[LoadingController,ToastController]}
+        { provide: PopOverService, useFactory: (loading, toast) => { return new PopOverService(loading, toast) }, deps: [LoadingController, ToastController] },
+        EmojiProvider
     ]
 })
 export class AppModule { }

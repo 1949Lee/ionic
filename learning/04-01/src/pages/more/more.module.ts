@@ -3,7 +3,6 @@ import { IonicPageModule } from 'ionic-angular';
 import { MorePage } from './more';
 import { LoginPageModule } from './login/login.module';
 import { RegisterPageModule } from './register/register.module';
-import { ShareModule } from '../../share/shre.module';
 import { UserInfoPageModule } from './user-info/user-info.module';
 import { UpdateAvatarPageModule } from './update-avatar/update-avatar.module';
 
@@ -16,7 +15,6 @@ import { UpdateAvatarPageModule } from './update-avatar/update-avatar.module';
     RegisterPageModule,
     UserInfoPageModule,
     UpdateAvatarPageModule,
-    ShareModule,
     IonicPageModule.forChild(MorePage),
   ],
   exports: [

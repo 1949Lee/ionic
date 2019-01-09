@@ -47,7 +47,6 @@ export class HomePage {
         this.rest.getUserQuestionList({userid:this.userId,type:'question', index: 1, number: 10 }).subscribe((data) => {
         // this.rest.getQuestionList({index: 1, number: 10 }).subscribe((data) => {
             loading.dismiss();
-            console.log(data);
             if(data !== null && data.length > 0){
                 this.questionList = data;
             } else {
