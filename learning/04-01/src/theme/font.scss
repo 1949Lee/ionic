@@ -1,0 +1,34 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-file-name}.eot?v=jaecb6');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-file-name}.eot?v=jaecb6#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-file-name}.ttf?v=jaecb6') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-file-name}.woff?v=jaecb6') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-file-name}.svg?v=jaecb6##{$icomoon-font-file-name}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="ion-"], [class*=" ion-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ion-keyboard,.ion-ios-keyboard,ion-md-keyboard {
+  &:before {
+    content: '\e955';
+  }
+}
+

@@ -80,14 +80,19 @@ export class ChatSessionPage {
         this.isShowEmojiPicker = !this.isShowEmojiPicker;
         let ele:HTMLTextAreaElement = this.sendInputEle._native.nativeElement;
         if(!this.isShowEmojiPicker) {
+            // 设置光标位置
             if(this.focusPosition){
                 ele.selectionStart = this.focusPosition
             } else {
-                ele.selectionStart = this.messageToSend.length;
+                if(this.messageToSend){
+                    ele.selectionStart = this.messageToSend.length;
+                }
+                else {
+                    ele.selectionStart = 0;
+                }
+
             }
             this.sendInputEle.setFocus();
-        } else {
-            // this.focusPosition = ele.selectionStart;
         }
     }
 
