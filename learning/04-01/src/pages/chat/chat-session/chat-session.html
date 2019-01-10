@@ -33,8 +33,7 @@
           </button>
         </ion-col>
         <ion-col col-8>
-          <ion-textarea [(ngModel)]="messageToSend" #sendInput (click)="handleInputClick()"
-          placeholder="输入内容"></ion-textarea>
+          <ion-textarea [(ngModel)]="messageToSend" row="4" #sendInput (click)="handleInputClick()" (keyup.enter)="sendMessage()" placeholder="输入内容"></ion-textarea>
         </ion-col>
         <ion-col col-2>
           <button ion-button clear icon-only item-right (click)="sendMessage()">

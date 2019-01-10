@@ -101,6 +101,7 @@ export class ChatSessionPage {
         // 留存光标位置
         let ele:HTMLTextAreaElement = this.sendInputEle._native.nativeElement;
         this.focusPosition = ele.selectionStart;
+        this.isShowEmojiPicker = false;
     }
 
     /**点击表情的处理 */
@@ -118,7 +119,7 @@ export class ChatSessionPage {
 
     /**点击发送消息 */
     sendMessage() {
-
+        console.log(this.messageToSend);
     }
 
     // getQuestionList(isRefresh: boolean = false) {
