@@ -4,3 +4,4 @@
 * 项目结构
 * 跟新头像
 * Tabs组件
+* Event是Ionic简单封装RxJS的服务。

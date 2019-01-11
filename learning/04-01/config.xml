@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.jiaxuanlee.lee1949" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>04-01</name>
+    <name>Anwser</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="lijiaxuan0811@hotmail.com" href="http://www.jiaxuanlee.com/">Li Jiaxuan</author>
     <content src="index.html" />
