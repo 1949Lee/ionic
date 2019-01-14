@@ -91,4 +91,9 @@ export class UserInfoPage {
         })
     }
 
+    signOut(){
+        this.storage.remove('userId');
+        this.navCtrl.pop();
+    }
+
 }
