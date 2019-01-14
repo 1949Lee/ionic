@@ -28,13 +28,16 @@ export class HomePage {
         private popOver: PopOverService
     ) {
 
+    }
+
+    ionViewDidLoad() {
+    }
+
+    ionViewWillEnter(){
         this.storage.get('userId').then((val) => {
             this.userId = val;
             this.getQuestionList();
         })
-    }
-
-    ionViewDidLoad() {
     }
 
     doMoreTap(e:Event){
