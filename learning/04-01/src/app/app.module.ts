@@ -16,6 +16,7 @@ import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { EmojiProvider } from '../providers/emoji/emoji';
+import { ChatServiceProvider } from '../providers/chat-service/chat-service';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { EmojiProvider } from '../providers/emoji/emoji';
         FilePath,
         FileTransfer,
         { provide: PopOverService, useFactory: (loading, toast) => { return new PopOverService(loading, toast) }, deps: [LoadingController, ToastController] },
-        EmojiProvider
+        EmojiProvider,
+        ChatServiceProvider
     ]
 })
 export class AppModule { }

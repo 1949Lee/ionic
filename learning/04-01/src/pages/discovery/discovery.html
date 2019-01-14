@@ -16,7 +16,7 @@
 <ion-content>
 
     <!-- 下拉刷新组件 -->
-    <ion-refresher (ionRefresh)="doRefresh($event)" (ionPull)="doPull($event)">
+    <ion-refresher pullMax="300" (ionRefresh)="doRefresh($event)" (ionPull)="doPull($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" [pullingText]="refresherText" refreshingSpinner="circles"
             refreshingText="拼命刷新中">
         </ion-refresher-content>

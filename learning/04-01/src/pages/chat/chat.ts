@@ -26,8 +26,8 @@ export class ChatPage {
     constructor(public navCtrl: NavController, public navParams: NavParams) {
         // 仅做聊天逻辑展示
         this.userinfo = {
-            userid: '123321',
-            username: '慕女神'
+            userid: '520',
+            username: '女神'
         }
         this.chatSessionPage = ChatSessionPage;
     }
