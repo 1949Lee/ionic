@@ -1,1 +1,12 @@
-page-notification {}
+page-notification {
+    .item-block {
+      border-bottom: 1px solid #c8c7cc;
+    }
+    .item-inner {
+      border-bottom: none !important;
+    }
+    .none{
+        font-size: 20px;
+        color: $note-color;
+    }
+  }

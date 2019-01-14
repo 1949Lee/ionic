@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
+import { PopOverService } from '../../share/service/pop-over.service';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the NotificationPage page.
@@ -15,10 +18,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NotificationPage {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    notificationList:any[] = [];
+
+    constructor(
+        private navCtrl: NavController,
+        private rest: RestProvider,
+        private storage: Storage
+    ) {
     }
 
-    ionViewDidLoad() {
+    ionViewWillEnter() {
+        this.storage.get('userId').then((val) => {
+            if(val){
+                this.rest.getUserNotifications({userid:val}).subscribe((list)=>{
+                    this.notificationList = list;
+                });
+            }
+        })
+    }
+
+    navDetails(id) {
+        this.navCtrl.push('DetailsPage',{id});
     }
 
 }

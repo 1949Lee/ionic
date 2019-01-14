@@ -7,12 +7,27 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>notification</ion-title>
+        <ion-title>通知</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ng-container <ng-container *ngIf="notificationList && notificationList.length > 0; else elseTemplate">
+        <ion-list margin-bottom class="my-list">
+            <ion-item *ngFor="let n of notificationList" (click)="navDetails(n.QuestionId)">
+                <ion-avatar item-left>
+                    <img src="{{n.HeadFace}}">
+                </ion-avatar>
+                <h2>{{n.NotificationTitle}}</h2>
+                <p>{{n.NotificationMessage}}</p>
+            </ion-item>
+        </ion-list>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <div text-center><span class="none">暂无通知</span></div>
+
+    </ng-template>
 
 </ion-content>

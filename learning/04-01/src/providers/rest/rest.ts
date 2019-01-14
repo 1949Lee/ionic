@@ -33,7 +33,7 @@ export class RestProvider {
     private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
 
     //notification
-    //   private apiUrlUserNotifications = "https://imoocqa.gugujiankong.com/api/account/usernotifications";
+    private apiUrlUserNotifications = "https://imoocqa.gugujiankong.com/api/account/usernotifications";
 
     /**
      * 登录
@@ -75,6 +75,10 @@ export class RestProvider {
         return this.getUrlReturn(this.apiGetUserQuestionList, data);
     }
 
+    getUserNotifications(data): Observable<any[]> {
+        return this.getUrlReturn(this.apiUrlUserNotifications, data);
+    }
+
     getQuestion(data): Observable<{ [key: string]: any }> {
         return this.getUrlReturn(this.apiUrlGetQuestion, data);
     }
@@ -87,7 +91,7 @@ export class RestProvider {
         return this.getUrlReturn(this.apiUrlGetQuestionWithUser, data);
     }
 
-    saveAnwser(data):Observable<{ [key: string]: any }> {
+    saveAnwser(data): Observable<{ [key: string]: any }> {
         return this.getUrlReturn(this.apiUrlAnswer, data);
     }
 
