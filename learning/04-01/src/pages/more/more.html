@@ -33,7 +33,7 @@
                 <p>点击修改个人信息</p>
             </ion-item>
         </ion-list>
-        <ion-list margin-bottom class="my-list">
+        <!-- <ion-list margin-bottom class="my-list">
             <ion-item detail-push (click)="nav('userInfo')">
                 <ion-icon [style.color]="'#1788eb'" name="flag" item-start></ion-icon>
                 <h2>我的提问</h2>
@@ -46,18 +46,18 @@
                 <ion-icon [style.color]="'#db323e'" name="bookmark" item-start></ion-icon>
                 <h2>我的关注</h2>
             </ion-item>
-        </ion-list>
+        </ion-list> -->
         <ion-list margin-bottom class="settings-list">
-            <ion-item (click)="nav('userInfo')">
+            <!-- <ion-item (click)="nav('userInfo')">
                 <ion-icon [style.color]="'#1788eb'" name="cloudy-night" item-start></ion-icon>
                 <h2>夜间模式</h2>
                 <ion-toggle item-end checked="false"></ion-toggle>
+            </ion-item> -->
+            <ion-item detail-push (click)="scanQR()">
+                <ion-icon name="qr-scanner" item-start></ion-icon>
+                <h2>扫描二维码</h2>
             </ion-item>
-            <ion-item detail-push (click)="nav('userInfo')">
-                <ion-icon name="cog" item-start></ion-icon>
-                <h2>设置</h2>
-            </ion-item>
-            <ion-item detail-push (click)="nav('userInfo')">
+            <ion-item detail-push (click)="nav('about')">
                 <ion-icon name="help-circle" item-start></ion-icon>
                 <h2>关于</h2>
             </ion-item>

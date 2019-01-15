@@ -59,6 +59,11 @@ export class MorePage {
             case 'userInfo':
                 this.navToUserInfo();
                 break;
+
+            // 关于APP
+            case 'about':
+                this.navToUserInfo();
+                break;
             default:
                 break;
         }

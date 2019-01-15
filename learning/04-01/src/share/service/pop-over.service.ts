@@ -13,7 +13,7 @@ export class PopOverService {
     loading(opt:PopLoader): Loading{
         let loader:Loading = this.loadingCtrl.create({
             spinner: opt.spinner || 'dots',
-            content:opt.content || '马上就好哦，别急啦',
+            content:opt.content || '拼命处理中',
             cssClass: opt.cssClass || 'lee-loading',
             showBackdrop: opt.showBackdrop || true,
             enableBackdropDismiss: opt.enableBackdropDismiss || false,

@@ -43,8 +43,8 @@ export class DiscoveryPage {
     getQuestionList(isRefresh:boolean = false) {
         let loading: Loading = this.popOver.loading({ content: '拼命加载中' });
         this.rest.getQuestionList({index: 1, number: 10 }).subscribe((data) => {
+            // console.log(loading);
             loading.dismiss();
-            console.log(data);
             if(data !== null && data.length > 0){
                 this.questionList = data;
             } else {
