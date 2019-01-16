@@ -14,6 +14,7 @@ import { IonicStorageModule } from "@ionic/storage";
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { QRScanner } from '@ionic-native/qr-scanner';
 import { FilePath } from '@ionic-native/file-path';
 import { EmojiProvider } from '../providers/emoji/emoji';
 import { ChatServiceProvider } from '../providers/chat-service/chat-service';
@@ -46,6 +47,7 @@ import { ChatServiceProvider } from '../providers/chat-service/chat-service';
         File,
         FilePath,
         FileTransfer,
+        QRScanner,
         { provide: PopOverService, useFactory: (loading, toast) => { return new PopOverService(loading, toast) }, deps: [LoadingController, ToastController] },
         EmojiProvider,
         ChatServiceProvider
