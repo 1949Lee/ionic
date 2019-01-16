@@ -5,6 +5,7 @@ import { LoginPageModule } from './login/login.module';
 import { RegisterPageModule } from './register/register.module';
 import { UserInfoPageModule } from './user-info/user-info.module';
 import { UpdateAvatarPageModule } from './update-avatar/update-avatar.module';
+import { ScanQrPageModule } from './scan-qr/scan-qr.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { UpdateAvatarPageModule } from './update-avatar/update-avatar.module';
     RegisterPageModule,
     UserInfoPageModule,
     UpdateAvatarPageModule,
+    ScanQrPageModule,
     IonicPageModule.forChild(MorePage),
   ],
   exports: [
@@ -22,6 +24,7 @@ import { UpdateAvatarPageModule } from './update-avatar/update-avatar.module';
     LoginPageModule,
     RegisterPageModule,
     UserInfoPageModule,
+    ScanQrPageModule,
     UpdateAvatarPageModule
   ]
 })

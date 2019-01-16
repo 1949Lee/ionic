@@ -60,10 +60,16 @@ export class MorePage {
                 this.navToUserInfo();
                 break;
 
+            // 扫描二维码
+            case 'scanQR':
+                this.navToScanQR();
+                break;
+
             // 关于APP
             case 'about':
                 this.navToUserInfo();
                 break;
+
             default:
                 break;
         }
@@ -106,6 +112,10 @@ export class MorePage {
                 this.isLogined = false;
             }
         });
+    }
+
+    navToScanQR(){
+        this.navCtrl.push('ScanQrPage',null,{animate:false});
     }
 
 

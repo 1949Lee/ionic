@@ -1,0 +1,35 @@
+page-scan-qr {
+    background-color: rgba(0, 0, 0, 0.541);
+
+    ion-header {
+        .toolbar-background {
+            background-color: transparent;
+        }
+
+        .toolbar-background-ios {
+            border-style: none !important;
+        }
+        .back-button{
+            color: white;
+        }
+        ion-title .toolbar-title{
+            color: white !important;
+        }
+    }
+
+    ion-content{
+        background-color: transparent !important;
+    }
+
+    ion-content .fixed-content,
+    ion-content .scroll-content {
+        background: transparent !important;
+    }
+}
+html,
+body,
+ion-app,
+ion-page,
+.nav-decor {
+    background: transparent !important;
+}

@@ -27,7 +27,7 @@ export class ChatPage {
         // 仅做聊天逻辑展示
         this.userinfo = {
             userid: '520',
-            username: '宝宝'
+            username: '大神'
         }
         this.chatSessionPage = ChatSessionPage;
     }

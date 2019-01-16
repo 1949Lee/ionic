@@ -1,44 +1,52 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController, Loading, Toast } from 'ionic-angular';
+import { LoadingController, ToastController, Loading, Toast, Alert, AlertController, AlertOptions } from 'ionic-angular';
 
 @Injectable()
 export class PopOverService {
     constructor(
-        private loadingCtrl:LoadingController, // loading
-        private toastCtrl: ToastController // toast
-        ){
+        private loadingCtrl: LoadingController, // loading
+        private toastCtrl: ToastController, // toast
+        private alertCtrl: AlertController // toast
+    ) {
     }
 
     /**创建等待动画，并返回动画对象 */
-    loading(opt:PopLoader): Loading{
-        let loader:Loading = this.loadingCtrl.create({
+    loading(opt: PopLoader): Loading {
+        let loader: Loading = this.loadingCtrl.create({
             spinner: opt.spinner || 'dots',
-            content:opt.content || '拼命处理中',
+            content: opt.content || '拼命处理中',
             cssClass: opt.cssClass || 'lee-loading',
             showBackdrop: opt.showBackdrop || true,
             enableBackdropDismiss: opt.enableBackdropDismiss || false,
             dismissOnPageChange: opt.dismissOnPageChange || true,
             duration: opt.duration || undefined,
         });
-        if(opt.callback){
+        if (opt.callback) {
             loader.onDidDismiss(opt.callback);
         }
         loader.present();
         return loader;
     }
 
+    alert(opt: AlertOptions): Alert {
+        let alert: Alert = this.alertCtrl.create(opt);
+        alert.present();
+        return alert;
+
+    }
+
     /**创建黑色悬浮提示，并返回对象。默认显示在底部，3秒后消失 */
-    toast(opt:PopToaster): Toast{
+    toast(opt: PopToaster): Toast {
         let toaster: Toast = this.toastCtrl.create({
-            message:opt.message,
+            message: opt.message,
             cssClass: opt.cssClass || 'lee-toast',
-            dismissOnPageChange:false,
+            dismissOnPageChange: false,
             showCloseButton: opt.showCloseButton || false,
             closeButtonText: opt.closeButtonText || undefined,
-            duration:opt.duration || 3000,
-            position:opt.position || 'bottom'
+            duration: opt.duration || 3000,
+            position: opt.position || 'bottom'
         });
-        if(opt.callback){
+        if (opt.callback) {
             toaster.onDidDismiss(opt.callback);
         }
         toaster.present();
@@ -57,7 +65,7 @@ export class PopOverService {
  * @member duration 选传，number，loading显示的时间，默认一直显示直到手动调用`dismiss()`关闭
  * @member callback 选传，回调函数，loading消失后回调,默认没有回调
  */
-export interface PopLoader{
+export interface PopLoader {
     spinner?: string;
     content?: string;
     cssClass?: string;
@@ -65,7 +73,7 @@ export interface PopLoader{
     enableBackdropDismiss?: boolean;
     dismissOnPageChange?: boolean;
     duration?: number;
-    callback?:(data: any, role: string) => void;
+    callback?: (data: any, role: string) => void;
 }
 
 /**
@@ -79,7 +87,7 @@ export interface PopLoader{
  * @member position 选传，string，显示的位置，可接受:`bottom,middle,top`，默认`bottom`
  * @member callback 选传，回调函数，toast消失后回调
  */
-export interface PopToaster{
+export interface PopToaster {
     message?: string;
     cssClass?: string;
     duration?: number;
@@ -87,5 +95,6 @@ export interface PopToaster{
     closeButtonText?: string;
     dismissOnPageChange?: boolean;
     position?: string;
-    callback?:(data: any, role: string) => void;
+    callback?: (data: any, role: string) => void;
 }
+
