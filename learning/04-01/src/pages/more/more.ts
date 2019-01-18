@@ -67,7 +67,7 @@ export class MorePage {
 
             // 关于APP
             case 'about':
-                this.navToUserInfo();
+                this.navToAbout();
                 break;
 
             default:
@@ -87,6 +87,10 @@ export class MorePage {
                 this.isLogined = false;
             }
         });
+    }
+
+    navToAbout(){
+        this.navCtrl.push('AboutPage');
     }
 
     navToUserInfo() {
